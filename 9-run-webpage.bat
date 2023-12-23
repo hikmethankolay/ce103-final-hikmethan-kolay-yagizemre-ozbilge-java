@@ -2,7 +2,7 @@
 @setlocal enableextensions
 @cd /d "%~dp0"
 
-cd calculator-app
+cd car_maintenance_app
 
 echo Run Web Site
 echo to Exit Use CTRL+Z CTRL+C

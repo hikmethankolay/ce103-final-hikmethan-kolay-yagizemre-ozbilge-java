@@ -2,12 +2,12 @@
 
 @file CarMaintenance.java
 @brief This file serves as the main application file for the CarMaintenanceApp App.
-@details This file contains the entry point of the application, which is the main method. It initializes the necessary components and executes the Calculator App.
+@details This file contains the entry point of the application, which is the main method. It initializes the necessary components and executes the Car Maintenance App.
 */
 /**
 
 @package com.source.car_maintenance
-@brief The com.source.car_maintenance package contains all the classes and files related to the Calculator App.
+@brief The com.source.car_maintenance package contains all the classes and files related to the Car Maintenance App.
 */
 package com.source.car_maintenance;
 
@@ -20,23 +20,22 @@ import ch.qos.logback.classic.Logger;
 /**
  *
  * @class CarMaintenance
- * @brief This class represents the main application class for the Calculator
+ * @brief This class represents the main application class for the Car Maintenance
  *        App.
- * @details The CarMaintenance class provides the entry point for the Calculator
- *          App. It initializes the necessary components, performs calculations,
- *          and handles exceptions.
- * @author ugur.coruh
+ * @details The CarMaintenance class provides the entry point for the Car Maintenance
+ *          App. It initializes the necessary components, and handles exceptions.
+ * @author Hikmethan KOLAY/Yagiz Emre OZBILGE
  */
 public class CarMaintenanceApp {
   /**
-   * @brief Logger for the CalculatorApp class.
+   * @brief Logger for the Car MaintenanceApp class.
    */
   private static final Logger logger = (Logger) LoggerFactory.getLogger(CarMaintenanceApp.class);
 
   /**
-   * @brief The main entry point of the Calculator App.
+   * @brief The main entry point of the Car Maintenance App.
    *
-   * @details The main method is the starting point of the Calculator App. It
+   * @details The main method is the starting point of the Car Maintenance App. It
    *          initializes the logger, performs logging, displays a greeting
    *          message, and handles user input.
    *

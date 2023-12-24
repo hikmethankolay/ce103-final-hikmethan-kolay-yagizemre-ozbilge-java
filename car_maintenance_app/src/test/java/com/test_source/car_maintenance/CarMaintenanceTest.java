@@ -58,15 +58,13 @@ public class CarMaintenanceTest {
   }
 
   /**
-   * @brief Test method to validate the addition operation.
-   *
-   * @details This method creates an instance of the CarMaintenance class and calls the `add` method with two integers. It asserts the expected result of the addition operation.
+   * @brief Tests the file_write function. THIS IS AN EXAMPLE, WE WILL WRITE IT PROPERLY LATER
    */
   @Test
   public void testAddition() {
     CarMaintenance CarMaintenance = new CarMaintenance();
-    int result = CarMaintenance.add(2, 3);
-    assertEquals(5, result);
+    CarMaintenance.FileWrite(null, null);
+    assertEquals(0, 5);
   }
 
 }

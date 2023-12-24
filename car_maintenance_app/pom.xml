@@ -19,7 +19,7 @@
 	<inceptionYear>2023</inceptionYear>
 	<developers>
 		<developer>
-			<name>Hikmethan KOLAY/Yagiz Emre OZBILGE</name>
+			<name>Hikmethan KOLAY</name>
 			<organization>RTEU</organization>
 			<email>hikmethan_kolay22@erdogan.edu.tr</email>
 			<roles>
@@ -28,33 +28,14 @@
 			</roles>
 		</developer>
 		<developer>
-			<name>Other Person</name>
-			<organization>RTEU</organization>
-			<email>mail@gmail.com</email>
-			<roles>
-				<role>Developer</role>
-			</roles>
-		</developer>
-	</developers>
-	<contributors>
-		<contributor>
-			<name>Hikmethan KOLAY/</name>
-			<email>hikmethan_kolay22@erdogan.edu.tr</email>
-			<organization>RTEU</organization>
-			<roles>
-				<role>Developer</role>
-				<role>Designer</role>
-			</roles>
-		</contributor>
-		<contributor>
 			<name>Yagiz Emre OZBILGE</name>
 			<organization>RTEU</organization>
 			<email>yagizemre_ozbilge22@erdogan.edu.tr</email>
 			<roles>
 				<role>Developer</role>
 			</roles>
-		</contributor>
-	</contributors>
+		</developer>
+	</developers>
 	<description>Car Maintenance App Project</description>
 	<organization>
 		<name>Recep Tayyip Erdogan University</name>
@@ -233,7 +214,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
-				<version>4.0.0-M8</version>
+				<version>4.0.0-M13</version>
 				<configuration>
 					<port>9000</port>
 					<tempWebappDirectory>${basedir}/target/site</tempWebappDirectory>
@@ -304,10 +285,10 @@
 				https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
 				<plugin>
 					<artifactId>maven-site-plugin</artifactId>
-					<version>4.0.0-M8</version>
+					<version>4.0.0-M13</version>
 					<configuration>
-					<port>9000</port>
-					<tempWebappDirectory>${basedir}/target/site</tempWebappDirectory>
+						<port>9000</port>
+						<tempWebappDirectory>${basedir}/target/site</tempWebappDirectory>
 					</configuration>
 				</plugin>
 				<plugin>

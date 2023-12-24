@@ -34,7 +34,7 @@
 	</poweredBy>
 
 	<body>
-		<head>Calculator App</head>
+		<head>Car Maintenance App</head>
 		<!-- Add any additional meta tags, CSS files, or JavaScript files -->
 
 		<menu name="Overview">
@@ -44,7 +44,7 @@
 				<item name="Project Info" href="project-info.html" />
 				<item name="Project Summary" href="summary.html" />
 				<item name="Project Team" href="team.html" />
-				<item name="GitHub Repository" href="https://github.com/ucoruh/eclipse-java-maven-template" />
+				<item name="GitHub Repository" href="https://github.com/hikmethankolay/ce103-final-hikmethan-kolay-yagizemre-ozbilge-java" />
 		</menu>
 
 		<menu name="Development">

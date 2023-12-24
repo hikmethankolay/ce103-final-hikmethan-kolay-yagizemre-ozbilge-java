@@ -2,9 +2,9 @@
 
 @file CarMaintenanceAppTest.java
 @brief This file contains the test cases for the CarMaintenanceApp class.
-@details This file includes test methods to validate the functionality of the CalculatorApp class. It uses JUnit for unit testing.
+@details This file includes test methods to validate the functionality of the CarMaintenanceApp class. It uses JUnit for unit testing.
 */
-package com.source.car_maintenance;
+package com.test_source.car_maintenance;
 
 import static org.junit.Assert.*;
 
@@ -19,12 +19,14 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.source.car_maintenance.CarMaintenanceApp;
+
 
 /**
 
 @class CarMaintenanceAppTest
 @brief This class represents the test class for the CarMaintenanceApp class.
-@details The CarMaintenanceAppTest class provides test methods to verify the behavior of the CalculatorApp class. It includes test methods for successful execution, object creation, and error handling scenarios.
+@details The CarMaintenanceAppTest class provides test methods to verify the behavior of the CarMaintenanceApp class. It includes test methods for successful execution, object creation, and error handling scenarios.
 @author Hikmetahn KOLAY/Yagiz Emre OZBILGE
 */
 public class CarMaintenanceAppTest {
@@ -64,7 +66,7 @@ public class CarMaintenanceAppTest {
   /**
    * @brief Test method to validate the successful execution of the main method.
    *
-   * @details This method redirects the System.in and System.out streams to simulate user input and capture the output. It calls the main method of CalculatorApp with a valid argument and asserts the expected behavior based on the output.
+   * @details This method redirects the System.in and System.out streams to simulate user input and capture the output. It calls the main method of CarMaintenanceApp with a valid argument and asserts the expected behavior based on the output.
    */
   @Test
   public void testMainSuccess() {
@@ -80,7 +82,7 @@ public class CarMaintenanceAppTest {
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     System.setOut(new PrintStream(outputStream));
     String[] args = new String[] {"0"};
-    // Call the main method of CalculatorApp
+    // Call the main method of CarMaintenanceApp
     CarMaintenanceApp.main(args);
     // Restore original System.in and System.out
     System.setIn(originalIn);
@@ -92,12 +94,13 @@ public class CarMaintenanceAppTest {
   /**
    * @brief Test method to validate the object creation of CarMaintenanceApp.
    *
-   * @details This method creates an instance of the CalculatorApp class and asserts the successful creation of the object.
+   * @details This method creates an instance of the CarMaintenanceApp class and asserts the successful creation of the object.
    */
   @Test
   public void testMainObject() {
     // Creating an instance of CarMaintenanceApp
-    CarMaintenanceApp app = new CarMaintenanceApp();
+    @SuppressWarnings("unused")
+	CarMaintenanceApp app = new CarMaintenanceApp();
     // Asserting the successful creation of the object
     assertTrue(true);
   }
@@ -105,7 +108,7 @@ public class CarMaintenanceAppTest {
   /**
    * @brief Test method to validate the error handling of the main method.
    *
-   * @details This method redirects the System.in and System.out streams to simulate user input and capture the output. It calls the main method of CalculatorApp with an invalid argument and asserts the expected behavior based on the output.
+   * @details This method redirects the System.in and System.out streams to simulate user input and capture the output. It calls the main method of CarMaintenanceApp with an invalid argument and asserts the expected behavior based on the output.
    */
   @Test
   public void testMainError() {
@@ -121,7 +124,7 @@ public class CarMaintenanceAppTest {
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     System.setOut(new PrintStream(outputStream));
     String[] args = new String[] {"1"};
-    // Call the main method of CalculatorApp
+    // Call the main method of CarMaintenanceApp
     CarMaintenanceApp.main(args);
     // Restore original System.in and System.out
     System.setIn(originalIn);

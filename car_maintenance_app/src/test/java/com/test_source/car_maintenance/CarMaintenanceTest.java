@@ -1,10 +1,10 @@
 /**
 
-@file CalculatorTest.java
-@brief This file contains the test cases for the Calculator class.
+@file CarMaintenanceTest.java
+@brief This file contains the test cases for the CarMaintenance class.
 @details This file includes test methods to validate the functionality of the CarMaintenance class. It uses JUnit for unit testing.
 */
-package com.source.car_maintenance;
+package com.test_source.car_maintenance;
 
 import static org.junit.Assert.*;
 
@@ -13,6 +13,8 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import com.source.car_maintenance.CarMaintenance;
 
 /**
 
@@ -58,7 +60,7 @@ public class CarMaintenanceTest {
   /**
    * @brief Test method to validate the addition operation.
    *
-   * @details This method creates an instance of the Calculator class and calls the `add` method with two integers. It asserts the expected result of the addition operation.
+   * @details This method creates an instance of the CarMaintenance class and calls the `add` method with two integers. It asserts the expected result of the addition operation.
    */
   @Test
   public void testAddition() {

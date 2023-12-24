@@ -204,16 +204,6 @@
 <!--				</executions>-->
 <!--			</plugin>-->
 
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-site-plugin</artifactId>
-				<version>4.0.0-M13</version>
-				<configuration>
-					<port>9000</port>
-					<tempWebappDirectory>${basedir}/target/site</tempWebappDirectory>
-				</configuration>
-			</plugin>
 			<!-- Maven Shade Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

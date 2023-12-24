@@ -38,7 +38,7 @@
 	</developers>
 	<contributors>
 		<contributor>
-			<name>Hikmethan KOLAY/Yagiz Emre OZBILGE</name>
+			<name>Hikmethan KOLAY/</name>
 			<email>hikmethan_kolay22@erdogan.edu.tr</email>
 			<organization>RTEU</organization>
 			<roles>
@@ -47,9 +47,9 @@
 			</roles>
 		</contributor>
 		<contributor>
-			<name>Other Person</name>
+			<name>Yagiz Emre OZBILGE</name>
 			<organization>RTEU</organization>
-			<email>mail@gmail.com</email>
+			<email>yagizemre_ozbilge22@erdogan.edu.tr</email>
 			<roles>
 				<role>Developer</role>
 			</roles>
@@ -104,6 +104,12 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.apache.maven.doxia</groupId>
+			<artifactId>doxia-sitetools</artifactId>
+			<version>2.0.0-M16</version>
+			<type>pom</type>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

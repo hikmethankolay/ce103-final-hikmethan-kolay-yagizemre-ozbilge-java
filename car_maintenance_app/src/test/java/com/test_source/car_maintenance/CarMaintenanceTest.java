@@ -24,7 +24,9 @@ import com.source.car_maintenance.CarMaintenance;
 @author ugur.coruh
 */
 public class CarMaintenanceTest {
-
+	String testString;
+	int fail = -1;
+    int success = 0;
   /**
    * @brief This method is executed once before all test methods.
    * @throws Exception
@@ -58,13 +60,15 @@ public class CarMaintenanceTest {
   }
 
   /**
-   * @brief Tests the file_write function. THIS IS AN EXAMPLE, WE WILL WRITE IT PROPERLY LATER
+   * @brief Tests the file_write function.
    */
   @Test
   public void testAddition() {
-    CarMaintenance CarMaintenance = new CarMaintenance();
-    CarMaintenance.FileWrite(null, null);
-    assertEquals(0, 5);
+      CarMaintenance car = new CarMaintenance();
+      testString = "0-)TEXT STRING WRITE\n";
+      String writeString = "TEXT STRING WRITE";
+      car.FileWrite("test5.bin", writeString);
+      assertEquals(testString, car.FileRead("test5.bin"));
   }
 
 }

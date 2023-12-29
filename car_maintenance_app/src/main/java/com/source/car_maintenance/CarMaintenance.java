@@ -11,9 +11,14 @@
 @brief The com.source.car_maintenance package contains all the classes and files related to the CarMaintenance App.
 */
 package com.source.car_maintenance;
-
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import org.slf4j.LoggerFactory;
-
+import java.io.FileInputStream;
+import java.io.InputStream;
 import ch.qos.logback.classic.Logger;
 /**
 
@@ -36,8 +41,17 @@ public class CarMaintenance {
    * @return 0 on success.
    */
   public int FileWrite(String FileName, String text) {
-	  logger.info("FileWrite Function worked succesfully");
-	  return 0;
+      text = "0-)" + text + "\n";
+
+      try (OutputStream myFile = new FileOutputStream(FileName)) {
+          byte[] bytes = text.getBytes(StandardCharsets.UTF_8);
+          myFile.write(bytes, 0, bytes.length);
+      } catch (IOException e) {
+          // Handle the exception according to your needs
+          e.printStackTrace();
+      }
+      logger.info("FileWrite Function worked succesfully");
+      return 0;
   }
   /**
   * @brief Opens a binary file, Reads all of its content, seperate line with "\n" and write them to console, also returns a string for unit tests.
@@ -47,8 +61,24 @@ public class CarMaintenance {
   * @return The contents of the file as a string.
   */
   public String FileRead(String FileName) {
-	  logger.info("FileRead Function worked succesfully");
-	  return "0";
+      String line = "";
+      try (InputStream myFile = new FileInputStream(FileName)) {
+          try (InputStreamReader streamReader = new InputStreamReader(myFile, StandardCharsets.UTF_8)) {
+              int character;
+              while ((character = streamReader.read()) != -1) {
+                  if (character == '\r') {
+                      continue;
+                  }
+                  line += (char) character;
+              }
+          }
+          System.out.println(line);
+      } catch (IOException ex) {
+          System.out.println("File operation failed. There is no record.");
+          System.out.println(ex.getMessage());
+          return "-1";
+      }
+      return line;
   }
   /**
   * @brief Appends given text to a binary file with a automatic calculated line number. Calcultes new lines line number by finding last lines line number.

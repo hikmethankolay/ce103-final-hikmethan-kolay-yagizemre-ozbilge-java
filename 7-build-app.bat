@@ -18,8 +18,11 @@ echo Delete and Create the "release" folder and its contents
 rd /S /Q "release"
 mkdir release
 
+xcopy /E /I /Y "original_test_files" "car_maintenance_app"
+
 echo Change directory to car_maintenance_app
 cd car_maintenance_app
+
 
 echo Perform Maven clean, test, and packaging
 call mvn clean test package
@@ -82,7 +85,22 @@ call copy README.md "car_maintenance_app\src\site\markdown\readme.md"
 cd car_maintenance_app
 echo Perform Maven site generation
 call mvn site
+
+del test1.bin
+del test2.bin
+del test3.bin
+del test4.bin
+del test5.bin
+del usertest.bin
+del usertest_2.bin
+del usertest_3.bin
+del *_test.bin
+del *_test_2.bin
+del *_test_3.bin
+del *_test_4.bin
+
 cd ..
+
 
 echo Package Output Jar Files
 tar -czvf release\application-binary.tar.gz -C car_maintenance_app\target '*.jar'

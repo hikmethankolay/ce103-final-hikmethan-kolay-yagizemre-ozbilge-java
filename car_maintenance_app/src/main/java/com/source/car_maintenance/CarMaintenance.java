@@ -45,18 +45,17 @@ public class CarMaintenance {
   public int FileWrite(String FileName, String text) {
       text = "0-)" + text + "\n";
 
-      try (OutputStream myFile = new FileOutputStream(FileName)) {
+      try (OutputStream myFile = new FileOutputStream(FileName, true)) {
           byte[] bytes = text.getBytes(StandardCharsets.UTF_8);
           myFile.write(bytes, 0, bytes.length);
       } catch (IOException e) {
-          // Handle the exception according to your needs
           e.printStackTrace();
       }
-      logger.info("FileWrite Function worked succesfully");
+
       return 0;
   }
   /**
-  * @brief Opens a binary file, Reads all of its content, seperate line with "\n" and write them to console, also returns a string for unit tests.
+  * @brief Opens a binary file, Reads all of its content, separate line with "\n" and write them to console, also returns a string for unit tests.
   *
   *
   * @param FileName The name of the file to read from.
@@ -172,7 +171,7 @@ public class CarMaintenance {
                   for (int i = 0; i < lines.length; i++) {
                       String updatedLine = lines[i];
                       if (updatedLine == null || updatedLine.isEmpty()) {
-                          break; // Stops if there is nothing on the next line since arrays have fixed slots inside them from the start
+                          break;
                       }
 
                       streamWriter.write(updatedLine);

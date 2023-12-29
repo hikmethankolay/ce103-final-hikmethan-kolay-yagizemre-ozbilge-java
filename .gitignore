@@ -959,3 +959,11 @@ coverage*[.json, .xml, .info]
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/c,csharp,vs,visualstudio,visualstudiocode,java,maven,c++,cmake,eclipse,netbeans
+
+/car_maintenance_app/test1.bin
+/car_maintenance_app/test2.bin
+/car_maintenance_app/test3.bin
+/car_maintenance_app/test4.bin
+/car_maintenance_app/test5.bin
+/car_maintenance_app/usertest_2.bin
+/car_maintenance_app/usertest_3.bin

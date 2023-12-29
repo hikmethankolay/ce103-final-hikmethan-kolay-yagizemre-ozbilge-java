@@ -15,6 +15,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import org.slf4j.LoggerFactory;
 import java.io.FileInputStream;
@@ -24,7 +25,8 @@ import ch.qos.logback.classic.Logger;
 
 @class CarMaintenance
 @brief Implementation file for car maintenance library functions.
-@author Hikmethan KOLAY/Yagiz Emre OZBILGE
+@author Hikmethan KOLAY
+@author Yagiz Emre OZBILGE
 */
 public class CarMaintenance {
 
@@ -89,8 +91,43 @@ public class CarMaintenance {
   * @return 0 on success.
   */
   public int FileAppend(String FileName, String text) {
-	  logger.info("FileAppend Function worked succesfully");
-	  return 0;
+      try {
+          String lastLine = "";
+          String currentLine = "";
+          char character;
+
+          try (InputStream myFile = new FileInputStream(FileName)) {
+              try (InputStreamReader streamReader = new InputStreamReader(myFile, "UTF-8")) {
+                  int data;
+                  while ((data = streamReader.read()) != -1) {
+                      character = (char) data;
+                      if (character == '\n') {
+                          currentLine += character;
+                          lastLine = currentLine;
+                          currentLine = "";
+                          continue;
+                      }
+                      currentLine += character;
+                  }
+              }
+          }
+
+          int pos = lastLine.indexOf("-)"); // Finds the location of "-)" in the last line
+          int lineNumber = Integer.parseInt(lastLine.substring(0, pos).trim()) + 1; // Finds the number for the appended line
+          text = lineNumber + "-)" + text + "\n";
+
+          try (OutputStream myFile = new FileOutputStream(FileName, true)) {
+              try (OutputStreamWriter streamWriter = new OutputStreamWriter(myFile, "UTF-8")) {
+                  streamWriter.write(text);
+              }
+          }
+          logger.info("FileAppend Function worked succesfully");
+          return 0;
+      } catch (IOException ex) {
+          System.out.println("File operation failed.");
+          System.out.println(ex.getMessage());
+          return -1;
+      }
   }
   /**
   * @brief This function Opens a binary file, finds the line that user wants to edit and replace it wih new text.
@@ -102,8 +139,55 @@ public class CarMaintenance {
   * @return 0 on success.
   */
   public int FileEdit(String fileName, int lineNumberToEdit, String newLine) {
-	  logger.info("FileEdit Function worked succesfully");
-	  return 0;
+      String[] lines = new String[100]; // An array to store lines
+      String line = "";
+      char character;
+      int lineCount = 0; // A variable for an if statement to check if the line that the user wants to edit exists
+      try {
+          try (InputStream myFile = new FileInputStream(fileName)) {
+              try (InputStreamReader streamReader = new InputStreamReader(myFile, "UTF-8")) {
+                  int data;
+                  while ((data = streamReader.read()) != -1) {
+                      character = (char) data;
+                      if (character == '\n') {
+                          line += character;
+                          lines[lineCount++] = line;
+                          line = "";
+                          continue;
+                      }
+                      line = line + character;
+                  }
+              }
+          }
+
+          if (lineNumberToEdit > 0 && lineNumberToEdit <= lineCount) {
+              lines[lineNumberToEdit] = lineNumberToEdit + "-)" + newLine + "\n"; // Changes a member of the Lines array to a new line with its line number
+          } else {
+              System.out.println("You can only edit existing lines.");
+              return -1;
+          }
+
+          try (OutputStream myFile = new FileOutputStream(fileName, false)) {
+              try (OutputStreamWriter streamWriter = new OutputStreamWriter(myFile, "UTF-8")) {
+                  for (int i = 0; i < lines.length; i++) {
+                      String updatedLine = lines[i];
+                      if (updatedLine == null || updatedLine.isEmpty()) {
+                          break; // Stops if there is nothing on the next line since arrays have fixed slots inside them from the start
+                      }
+
+                      streamWriter.write(updatedLine);
+                  }
+              }
+          }
+
+          System.out.println("\nData successfully edited\n\n");
+          logger.info("FileEdit Function worked succesfully");
+          return 0;
+      } catch (IOException ex) {
+          System.out.println("File operation failed.");
+          System.out.println(ex.getMessage());
+          return -1;
+      }
   }
   /**
   * @brief This function Opens a binary file, deletes the line user wanted and make adjustments on line number acordingly.
@@ -114,18 +198,76 @@ public class CarMaintenance {
   * @return 0 on success.
   */
   public int FileLineDelete(String fileName, int LineNumberToDelete) {
-	  logger.info("FileLineDelete Function worked succesfully");
-	  return 0;
+      String[] lines = new String[100]; // An array to store lines
+      String line = "";
+      char character;
+      int lineCount = 0; // A variable for an if statement to check if the line that the user wants to edit exists
+      try {
+          try (InputStream myFile = new FileInputStream(fileName)) {
+              try (InputStreamReader streamReader = new InputStreamReader(myFile, "UTF-8")) {
+                  int data;
+                  while ((data = streamReader.read()) != -1) {
+                      character = (char) data;
+                      if (character == '\n') {
+                          line += character;
+                          lines[lineCount++] = line;
+                          line = "";
+                          continue;
+                      }
+                      line = line + character;
+                  }
+              }
+          }
+
+          if (LineNumberToDelete > 0 && LineNumberToDelete < lineCount) {
+              for (int i = LineNumberToDelete; i < lineCount - 1; ++i) {
+                  lines[i] = lines[i + 1];
+              }
+
+              lines[lineCount - 1] = "";
+          } else {
+              System.out.println("You can only erase existing lines");
+              return -1;
+          }
+
+          try (OutputStream myFile = new FileOutputStream(fileName, false)) {
+              try (OutputStreamWriter streamWriter = new OutputStreamWriter(myFile, "UTF-8")) {
+                  for (String updatedLine : lines) {
+                      if (updatedLine == null || updatedLine.isEmpty()) {
+                          break;
+                      }
+
+                      int pos = updatedLine.indexOf("-)");
+                      int lineNumber = Integer.parseInt(updatedLine.substring(0, pos));
+
+                      if (lineNumber > LineNumberToDelete) {
+                          String updatedLineWithNewNumber = (lineNumber - 1) + updatedLine.substring(pos);
+                          streamWriter.write(updatedLineWithNewNumber);
+                      } else {
+                          streamWriter.write(updatedLine);
+                      }
+                  }
+              }
+          }
+
+          System.out.println("\nData successfully deleted\n\n");
+    	  logger.info("FileLineDelete Function worked succesfully");
+          return 0;
+      } catch (IOException ex) {
+          System.out.println("File operation failed");
+          System.out.println(ex.getMessage());
+          return -1;
+      }
   }
   
   
   /**
   * @brief This function is for user register
   *
-  * Function creates a user.bin file and writes inputted username and password in it.
+  * Function creates a user.bin file and writes inputed username and password in it.
   *
   * @return 0 on success.
-  * @return -1 on faill.
+  * @return -1 on fail.
   */
   public int UserRegister(String newUsername, String newPassword, String newRecoveryKey, String userFile) {
 	  logger.info("UserRegister Function worked succesfully");
@@ -134,7 +276,7 @@ public class CarMaintenance {
   /**
    * @brief This function is for user login
    *
-   * Function read user.bin file and checks if username and password matchs with inputted username and password
+   * Function read user.bin file and checks if username and password matches with inputed username and password
    *
    * @return 0 on success.
    * @return -1 on fail.

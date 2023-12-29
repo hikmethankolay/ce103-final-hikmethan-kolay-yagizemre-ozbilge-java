@@ -161,7 +161,7 @@ public class CarMaintenance {
           }
 
           if (lineNumberToEdit > 0 && lineNumberToEdit <= lineCount) {
-              lines[lineNumberToEdit - 1] = lineNumberToEdit + "-)" + newLine + "\n"; // Changes a member of the Lines array to a new line with its line number
+              lines[lineNumberToEdit] = lineNumberToEdit + "-)" + newLine + "\n"; // Changes a member of the Lines array to a new line with its line number
           } else {
               System.out.println("You can only edit existing lines.");
               return -1;

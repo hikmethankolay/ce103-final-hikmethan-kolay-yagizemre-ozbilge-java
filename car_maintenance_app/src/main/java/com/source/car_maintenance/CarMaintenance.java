@@ -462,7 +462,7 @@ public class CarMaintenance {
           return 0;
       }
       else {
-          FileWrite(fileName, "VEHICLE MODEL | SERVICE KM | SERVICE PROVIDER | SERVICE COST");
+          FileWrite(fileName, "VEHICLE MODEL | SERVICE KM | PLANNED SERVICE TYPE");
           FileAppend(fileName, record);
           return 0;
       }

@@ -38,7 +38,7 @@ public class CarMaintenance {
   public int FileWrite(String FileName, String text) {
       text = "0-)" + text + "\n";
 
-      try (OutputStream myFile = new FileOutputStream(FileName, true)) {
+      try (OutputStream myFile = new FileOutputStream(FileName)) {
           byte[] bytes = text.getBytes(StandardCharsets.UTF_8);
           myFile.write(bytes, 0, bytes.length);
       } catch (IOException e) {
@@ -265,7 +265,7 @@ public class CarMaintenance {
 	  String loginInfo;
       loginInfo = newUsername + "/" + newPassword + "/" + newRecoveryKey;
 
-      try (OutputStream myFile = new FileOutputStream(userFile, true)) {
+      try (OutputStream myFile = new FileOutputStream(userFile)) {
           byte[] bytes = loginInfo.getBytes(StandardCharsets.UTF_8);
           myFile.write(bytes, 0, bytes.length);
       } catch (IOException e) {
@@ -371,7 +371,7 @@ public class CarMaintenance {
     	  
     	  newLoginInfo = usernameRead + "/" + newPassword + "/" + recoveryKeyRead;
     	  
-          try (OutputStream myFile = new FileOutputStream(userFile, true)) {
+          try (OutputStream myFile = new FileOutputStream(userFile)) {
               byte[] bytes = newLoginInfo.getBytes(StandardCharsets.UTF_8);
               myFile.write(bytes, 0, bytes.length);
           } catch (IOException e) {

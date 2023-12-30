@@ -511,7 +511,7 @@ public class CarMaintenance {
   * @return -1 on fail.
   */
   public int RegisterExpenseRecord(String carModel, String expenseDate, String expenseType, int expense,String fileName) {
-	  String record = carModel + " " + expenseDate + " " + expenseType + " " + expense;
+	  String record = carModel + "   " + expenseDate + "   " + expenseType + "   " + expense;
 	  
 	  if (new File(fileName).exists()) {
 		  FileAppend(fileName, record);
@@ -531,7 +531,7 @@ public class CarMaintenance {
   * @return -1 on fail.
    */
   public int EditExpenseRecord(int lineNumbertoEdit,String carModel, String expenseDate, String expenseType, int expense, String fileName) {
-	 String record = carModel + " " + expenseDate + "  " + expenseType + " " + expense;
+	 String record = carModel + "   " + expenseDate + "   " + expenseType + "   " + expense;
 	  
 	if(FileEdit(fileName, lineNumbertoEdit, record) == 0) {
 		return 0;

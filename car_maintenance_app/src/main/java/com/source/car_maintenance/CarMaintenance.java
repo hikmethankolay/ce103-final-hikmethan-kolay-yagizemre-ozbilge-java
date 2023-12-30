@@ -601,6 +601,11 @@ public class CarMaintenance {
   * @return -1 on fail.
   */
   public int DeleteFuelEfficiencyRecord(int lineNumberToDelete,String fileName) {
-	  return 0;
-  }
+	  if(FileLineDelete(fileName, lineNumberToDelete) == 0) {
+	      return 0;
+      } else {
+	    return -1;
+    }
+   }
 }
+  

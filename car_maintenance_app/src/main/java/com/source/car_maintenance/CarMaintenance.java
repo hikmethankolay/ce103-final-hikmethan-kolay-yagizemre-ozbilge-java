@@ -317,11 +317,11 @@ public class CarMaintenance {
 
       if (username.equals(usernameRead) && password.equals(passwordRead)) {
           System.out.println("Login Successful");
-          logger.info("UserLogin Function worked succesfully");
+          logger.info("UserLogin Function: Login Successful");
           return 0;
       } else {
           System.out.println("Wrong username or password");
-          logger.info("UserLogin Function worked succesfully");
+          logger.info("UserLogin Function: Wrong username or password");
           return -1;
       }
 	  
@@ -358,7 +358,7 @@ public class CarMaintenance {
               if (count == 0) {
                   usernameRead += character;
               } else if (count == 1) {
-            	  break;
+            	  continue;
               } else if (count == 2) {
             	  recoveryKeyRead += character;
               }
@@ -379,12 +379,12 @@ public class CarMaintenance {
           }
     	  
           System.out.println("Password Change Successful");
-          logger.info("UserChangePassword Function worked succesfully");
+          logger.info("UserChangePassword Function: Password Change Successful");
           return 0;
           
       } else {
           System.out.println("Wrong Recovery Key");
-          logger.info("UserChangePassword Function worked succesfully");
+          logger.info("UserChangePassword Function: Wrong Recovery Key");
           return -1;
       }
       

@@ -584,8 +584,15 @@ public class CarMaintenance {
   * @return -1 on fail.
   */
   public int EditFuelEfficiencyRecord(int lineNumberToEdit, String carModel, float fuelConsumed, float roadTraveled, String fileName) {
+	  float efficiency = (fuelConsumed/roadTraveled) * 100;
+	  String record = carModel + " " + efficiency;
+	  
+	  if(FileEdit(fileName, lineNumberToEdit, record) == 0) {
 	  return 0;
+  } else {
+	  return -1;
   }
+}
   /**
   * @brief This function delete the records in fuel_efficiency_records.bin.
   *

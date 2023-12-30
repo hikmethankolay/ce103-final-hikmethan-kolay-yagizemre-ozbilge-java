@@ -1,30 +1,30 @@
 /**
-
-@file CarMaintenance.java
-@brief This file serves as the main application file for the CarMaintenanceApp App.
-@details This file contains the entry point of the application, which is the main method. It initializes the necessary components and executes the Car Maintenance App.
+ * @file CarMaintenanceApp.java
+ * @brief This file serves as the main application file for the Car Maintenance App.
+ * @details This file contains the entry point of the application, which is the main method. It initializes the necessary components and executes the Car Maintenance App.
+ * 
 */
-/**
 
-@package com.source.car_maintenance
-@brief The com.source.car_maintenance package contains all the classes and files related to the Car Maintenance App.
+/**
+ * 
+ * @package com.source.car_maintenance
+ * @brief The com.source.car_maintenance package contains all the classes and files related to the Car Maintenance App.
+ * 
 */
 package com.source.car_maintenance;
-
 import java.io.IOException;
-
 import org.slf4j.LoggerFactory;
-
 import ch.qos.logback.classic.Logger;
 
 /**
  *
- * @class CarMaintenance
+ * @class CarMaintenanceApp
  * @brief This class represents the main application class for the Car Maintenance
  *        App.
  * @details The CarMaintenance class provides the entry point for the Car Maintenance
  *          App. It initializes the necessary components, and handles exceptions.
- * @author Hikmethan KOLAY/Yagiz Emre OZBILGE
+ * @author Hikmethan KOLAY
+ * @author Yagiz Emre OZBILGE
  */
 public class CarMaintenanceApp {
   /**

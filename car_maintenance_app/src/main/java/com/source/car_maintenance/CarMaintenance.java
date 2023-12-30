@@ -1,14 +1,13 @@
 /**
-
-@file CarMaintenance.java
-@brief This file serves as a demonstration file for the CarMaintenance class.
-@details This file contains the implementation of the CarMaintenance class, which provides various mathematical operations.
+ * @file CarMaintenance.java
+ * @brief This file serves as a demonstration file for the CarMaintenance class.
+ * @details This file contains the implementation of the CarMaintenance class, which provides various file operations.
+ * 
 */
 
 /**
-
-@package com.source.car_maintenance
-@brief The com.source.car_maintenance package contains all the classes and files related to the CarMaintenance App.
+ * @package com.source.car_maintenance
+ * @brief The com.source.car_maintenance package contains all the classes and files related to the CarMaintenance App.
 */
 package com.source.car_maintenance;
 import java.io.FileOutputStream;
@@ -22,11 +21,10 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import ch.qos.logback.classic.Logger;
 /**
-
-@class CarMaintenance
-@brief Implementation file for car maintenance library functions.
-@author Hikmethan KOLAY
-@author Yagiz Emre OZBILGE
+ * @class CarMaintenance
+ * @brief Implementation file for car maintenance library functions.
+ * @author Hikmethan KOLAY
+ * @author Yagiz Emre OZBILGE
 */
 public class CarMaintenance {
 

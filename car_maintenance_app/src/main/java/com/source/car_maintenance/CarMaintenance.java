@@ -10,19 +10,11 @@
  * @brief The com.source.car_maintenance package contains all the classes and files related to the CarMaintenance App.
 */
 package com.source.car_maintenance;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import org.slf4j.LoggerFactory;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import ch.qos.logback.classic.Logger;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+
 /**
  * @class CarMaintenance
  * @brief Implementation file for car maintenance library functions.
@@ -371,8 +363,8 @@ public class CarMaintenance {
   public int RegisterExpenseRecord(String carModel, String expenseDate, String expenseType, int expense,String fileName) {
 	  String record = carModel + " " + expenseDate + " " + expenseType + " " + expense;
 	  
-	  if (!new File(fileName).exists()) {
-          System.out.println("There is no user info. Please register first.");
+	  if (new File(fileName).exists()) {
+		  FileAppend(fileName, record);
           return -1;
       
 	  } else {
@@ -389,10 +381,10 @@ public class CarMaintenance {
   * @return -1 on fail.
    */
   public int EditExpenseRecord(int lineNumbertoEdit,String carModel, String expenseDate, String expenseType, int expense, String fileName) {
-	  String record = carModel + " " + expenseDate + "  " + expenseType + " " + expense;
+	 String record = carModel + " " + expenseDate + "  " + expenseType + " " + expense;
 	  
-	  if(FileEdit(fileName, lineNumbertoEdit, record) == 0) {
-	  return 0;
+	if(FileEdit(fileName, lineNumbertoEdit, record) == 0) {
+		return 0;
     } else {
     	return -1;
     }
@@ -406,10 +398,10 @@ public class CarMaintenance {
   */
   public int DeleteExpenseRecord(int lineNumbertoDelete,String fileName) {
 	  if(FileLineDelete(fileName, lineNumbertoDelete) == 0) {
-	  return 0;
-  } else {
-	  return -1;
-  }
+		  return 0;
+	  } else {
+		  return -1;
+	  }
 }
   
   

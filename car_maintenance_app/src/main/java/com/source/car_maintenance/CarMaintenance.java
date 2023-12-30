@@ -571,7 +571,7 @@ public class CarMaintenance {
 		  return 0;
 		  
 	  } else {
-		  FileWrite(fileName, "CAR MODEL | FUEL CONSUMED(L/KM)");
+		  FileWrite(fileName, "CAR MODEL | FUEL CONSUMED(L/100KM)");
 		  FileAppend(fileName, record);
 		  return 0;
 	  }

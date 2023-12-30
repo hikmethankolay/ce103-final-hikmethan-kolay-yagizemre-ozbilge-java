@@ -10,16 +10,11 @@
  * @brief The com.source.car_maintenance package contains all the classes and files related to the CarMaintenance App.
 */
 package com.source.car_maintenance;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import org.slf4j.LoggerFactory;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import ch.qos.logback.classic.Logger;
+import java.io.*;
+
 /**
  * @class CarMaintenance
  * @brief Implementation file for car maintenance library functions.
@@ -267,6 +262,16 @@ public class CarMaintenance {
   * @return -1 on fail.
   */
   public int UserRegister(String newUsername, String newPassword, String newRecoveryKey, String userFile) {
+	  String loginInfo;
+      loginInfo = newUsername + "/" + newPassword + "/" + newRecoveryKey;
+
+      try (OutputStream myFile = new FileOutputStream(userFile, true)) {
+          byte[] bytes = loginInfo.getBytes(StandardCharsets.UTF_8);
+          myFile.write(bytes, 0, bytes.length);
+      } catch (IOException e) {
+          e.printStackTrace();
+      }
+
 	  logger.info("UserRegister Function worked succesfully");
 	  return 0;
   }
@@ -279,8 +284,47 @@ public class CarMaintenance {
    * @return -1 on fail.
    */
   public int UserLogin(String username, String password, String userFile) {
-	  logger.info("UserLogin Function worked succesfully");
-	  return 0;
+      String usernameRead = "";
+      String passwordRead = "";
+      int count = 0;
+
+      if (!new File(userFile).exists()) {
+          System.out.println("There is no user info. Please register first.");
+          return -1;
+      }
+
+      try (BufferedReader reader = new BufferedReader(new FileReader(userFile))) {
+          int data;
+          while ((data = reader.read()) != -1) {
+              char character = (char) data;
+
+              if (character == '/') {
+                  count++;
+                  continue;
+              }
+
+              if (count == 0) {
+                  usernameRead += character;
+              } else if (count == 1) {
+                  passwordRead += character;
+              } else if (count == 2) {
+                  break;
+              }
+          }
+      } catch (IOException e) {
+          e.printStackTrace();
+      }
+
+      if (username.equals(usernameRead) && password.equals(passwordRead)) {
+          System.out.println("Login Successful");
+          logger.info("UserLogin Function: Login Successful");
+          return 0;
+      } else {
+          System.out.println("Wrong username or password");
+          logger.info("UserLogin Function: Wrong username or password");
+          return -1;
+      }
+	  
   }
   /**
    * @brief This function changes password of user.
@@ -290,8 +334,60 @@ public class CarMaintenance {
    * @return -1 on fail.
    */
   public int UserChangePassword(String recoveryKey, String newPassword, String userFile) {
-	  logger.info("UserChangePassword Function worked succesfully");
-	  return 0;
+
+	  String usernameRead = "";
+      String recoveryKeyRead = "";
+      String newLoginInfo;
+      int count = 0;
+
+      if (!new File(userFile).exists()) {
+          System.out.println("There is no user info. Please register first.");
+          return -1;
+      }
+
+      try (BufferedReader reader = new BufferedReader(new FileReader(userFile))) {
+          int data;
+          while ((data = reader.read()) != -1) {
+              char character = (char) data;
+
+              if (character == '/') {
+                  count++;
+                  continue;
+              }
+
+              if (count == 0) {
+                  usernameRead += character;
+              } else if (count == 1) {
+            	  continue;
+              } else if (count == 2) {
+            	  recoveryKeyRead += character;
+              }
+          }
+      } catch (IOException e) {
+          e.printStackTrace();
+      }
+
+      if (recoveryKey.equals(recoveryKeyRead)) {
+    	  
+    	  newLoginInfo = usernameRead + "/" + newPassword + "/" + recoveryKeyRead;
+    	  
+          try (OutputStream myFile = new FileOutputStream(userFile, true)) {
+              byte[] bytes = newLoginInfo.getBytes(StandardCharsets.UTF_8);
+              myFile.write(bytes, 0, bytes.length);
+          } catch (IOException e) {
+              e.printStackTrace();
+          }
+    	  
+          System.out.println("Password Change Successful");
+          logger.info("UserChangePassword Function: Password Change Successful");
+          return 0;
+          
+      } else {
+          System.out.println("Wrong Recovery Key");
+          logger.info("UserChangePassword Function: Wrong Recovery Key");
+          return -1;
+      }
+      
   }
   
   /**

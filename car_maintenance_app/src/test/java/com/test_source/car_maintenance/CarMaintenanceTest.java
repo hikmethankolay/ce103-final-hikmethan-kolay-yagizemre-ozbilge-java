@@ -152,4 +152,55 @@ public void TestFileDeleteFail_2()
     assertEquals(fail, car.FileLineDelete("test4.bin", 100));
 }
 
+@Test
+public void TestUserRegister()
+{
+    CarMaintenance car = new CarMaintenance();
+    testString = "username/password/recoverykey";
+    car.UserRegister("username", "password", "recoverykey", "usertest.bin");
+    assertEquals(testString, car.FileRead("usertest.bin"));
+}
+
+@Test
+public void TestUserLogin()
+{
+    CarMaintenance car = new CarMaintenance();
+    assertEquals(success, car.UserLogin("username", "password", "usertest_2.bin"));
+}
+
+@Test
+public void TestUserLoginFail()
+{
+    CarMaintenance car = new CarMaintenance();
+    assertEquals(fail, car.UserLogin("usernameaa", "passwordaa", "usertest_2.bin"));
+}
+
+@Test
+public void TestUserLoginFail_2()
+{
+    CarMaintenance car = new CarMaintenance();
+    assertEquals(fail, car.UserLogin("username", "password", "usertestfail.bin"));
+}
+
+@Test
+public void TestUserChangePassword()
+{
+    CarMaintenance car = new CarMaintenance();
+    assertEquals(success, car.UserChangePassword("recoverykey", "newpassword", "usertest_3.bin"));
+}
+
+@Test
+public void TestUserChangePasswordFail()
+{
+    CarMaintenance car = new CarMaintenance();
+    assertEquals(fail, car.UserChangePassword("recoverykey", "newpassword", "usertestfail.bin"));
+}
+
+@Test
+public void TestUserChangePasswordFail_2()
+{
+    CarMaintenance car = new CarMaintenance();
+    assertEquals(fail, car.UserChangePassword("recoverykeyaaa", "newpassword", "usertest_3.bin"));
+}
+
 }

@@ -515,7 +515,7 @@ public class CarMaintenance {
 	  
 	  if (new File(fileName).exists()) {
 		  FileAppend(fileName, record);
-          return -1;
+          return 0;
       
 	  } else {
 		  FileWrite(fileName, "CAR MODEL | EXPENSE DATE | EXPENSE TYPE | EXPENSE");

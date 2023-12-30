@@ -331,4 +331,134 @@ public void TestDeleteReminderFail_2()
     assertEquals(fail, car.DeleteMaintenanceReminderRecord(6, "reminder_logging_records_test.bin"));
 
 }
+
+@Test
+public void TestRegisterExpense()
+{
+    CarMaintenance car = new CarMaintenance();
+    testString = "0-)CAR MODEL | EXPENSE DATE | EXPENSE TYPE | EXPENSE\n1-)Audi   10/10/2023   Brake   15000\n";
+    car.RegisterExpenseRecord("Audi", "10/10/2023", "Brake", 15000, "expense_logging_records_test.bin");
+    assertEquals(testString, car.FileRead("expense_logging_records_test.bin"));
+}
+
+@Test
+public void TestRegisterExpense_2()
+{
+    CarMaintenance car = new CarMaintenance();
+    testString = "0-)CAR MODEL | EXPENSE DATE | EXPENSE TYPE | EXPENSE\n1-)Audi   10/10/2023   Brake   15000\n2-)Ferrari   11/11/2023   Oil   19000\n";
+    car.RegisterExpenseRecord("Ferrari", "11/11/2023", "Oil", 19000, "expense_logging_records_test_2.bin");
+    assertEquals(testString, car.FileRead("expense_logging_records_test_2.bin"));
+}
+
+@Test
+public void TestEditExpense()
+{
+    CarMaintenance car = new CarMaintenance();
+    testString = "0-)CAR MODEL | EXPENSE DATE | EXPENSE TYPE | EXPENSE\n1-)Mercedes   11/11/2023   Oil   17000\n";
+    car.EditExpenseRecord(1, "Mercedes", "11/11/2023", "Oil", 17000, "expense_logging_records_test_3.bin");
+    assertEquals(testString, car.FileRead("expense_logging_records_test_3.bin"));
+}
+
+@Test
+public void TestEditExpenseFail()
+{
+    CarMaintenance car = new CarMaintenance();
+    assertEquals(fail, car.EditExpenseRecord(1, "Audi", "10/10/2023", "Brake", 15000, "expense_logging_records_testaaa.bin"));
+}
+
+@Test
+public void TestEditExpenseFail_2()
+{
+    CarMaintenance car = new CarMaintenance();
+    assertEquals(fail, car.EditExpenseRecord(8, "Audi", "10/10/2023", "Brake", 15000, "expense_logging_records_test.bin"));
+}
+
+@Test
+public void TestDeleteExpense()
+{
+    CarMaintenance car = new CarMaintenance();
+    testString = "0-)CAR MODEL | EXPENSE DATE | EXPENSE TYPE | EXPENSE\n";
+    car.DeleteExpenseRecord(1, "expense_logging_records_test_4.bin");
+    assertEquals(testString, car.FileRead("expense_logging_records_test_4.bin"));
+}
+
+@Test
+public void TestDeleteExpenseFail()
+{
+    CarMaintenance car = new CarMaintenance();
+    assertEquals(fail, car.DeleteExpenseRecord(1,"expense_logging_records_testaaa.bin"));
+}
+
+@Test
+public void TestDeleteExpenseFail_2()
+{
+    CarMaintenance car = new CarMaintenance();
+    assertEquals(fail, car.DeleteExpenseRecord(7, "expense_logging_records_test.bin"));
+}
+/**
+@Test
+public void TestRegisterFuel()
+{
+    CarMaintenance car = new CarMaintenance();
+    testString = "0-)CAR MODEL | FUEL CONSUMED(L/100KM)\n1-)BWM   5\n";
+    car.RegisterFuelEfficiencyRecord("BWM", 50, 1000, "fuel_efficiency_records_test.bin");
+    assertEquals(testString, car.FileRead("fuel_efficiency_records_test.bin"));
+
+}
+@Test
+public void TestRegisterFuel_2()
+{
+    CarMaintenance car = new CarMaintenance();
+    testString = "0-)CAR MODEL | FUEL CONSUMED(L/100KM)\n1-)BWM   5\n2-)Ferrari   8\n";
+    car.RegisterFuelEfficiencyRecord("Ferrari", 80, 1000, "fuel_efficiency_records_test_2.bin");
+    assertEquals(testString, car.FileRead("fuel_efficiency_records_test_2.bin"));
+}
+@Test
+public void TestEditFuel()
+{
+    CarMaintenance car = new CarMaintenance();
+    testString = "0-)CAR MODEL | FUEL CONSUMED(L/100KM)\n1-)Audi   6\n";
+    car.EditFuelEfficiencyRecord(1, "Audi", 60, 1000, "fuel_efficiency_records_test_3.bin");
+    assertEquals(testString, car.FileRead("fuel_efficiency_records_test_3.bin"));
+
+}
+@Test
+public void TestEditFuelFail()
+{
+    CarMaintenance car = new CarMaintenance();
+    assertEquals(fail, car.EditFuelEfficiencyRecord(1,"Mercedes",2.0f,2.0f, "fuel_efficiency_records_testaaa.bin"));
+
+}
+@Test
+public void TestEditFuelFail_2()
+{
+    CarMaintenance car = new CarMaintenance();
+    assertEquals(fail, car.EditFuelEfficiencyRecord(6,"Mercedes",2.0f,2.0f, "fuel_efficiency_records_test.bin"));
+
+}
+@Test
+public void TestDeleteFuel()
+{
+    CarMaintenance car = new CarMaintenance();
+    testString = "0-)CAR MODEL | FUEL CONSUMED(L/100KM)\n";
+    car.DeleteFuelEfficiencyRecord(1, "fuel_efficiency_records_test_4.bin");
+    assertEquals(testString, car.FileRead("fuel_efficiency_records_test_4.bin"));
+
+}
+@Test
+public void TestDeleteFuelFail()
+{
+    CarMaintenance car = new CarMaintenance();
+    assertEquals(fail, car.DeleteFuelEfficiencyRecord(1, "fuel_efficiency_records_testaaa.bin"));
+
+}
+@Test
+public void TestDeleteFuelFail_2()
+{
+    CarMaintenance car = new CarMaintenance();
+    assertEquals(fail, car.DeleteFuelEfficiencyRecord(5, "fuel_efficiency_records_test.bin"));
+
+}
+
+*/
 }

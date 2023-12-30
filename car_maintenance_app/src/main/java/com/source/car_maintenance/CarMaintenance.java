@@ -389,7 +389,13 @@ public class CarMaintenance {
   * @return -1 on fail.
    */
   public int EditExpenseRecord(int lineNumbertoEdit,String carModel, String expenseDate, String expenseType, int expense, String fileName) {
+	  String record = carModel + " " + expenseDate + "  " + expenseType + " " + expense;
+	  
+	  if(FileEdit(fileName, lineNumbertoEdit, record) == 0) {
 	  return 0;
+    } else {
+    	return -1;
+    }
   }
   /**
   * @brief This function delete records to expense_logging_records.bin.

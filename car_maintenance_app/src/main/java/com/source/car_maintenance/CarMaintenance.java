@@ -10,11 +10,10 @@
  * @brief The com.source.car_maintenance package contains all the classes and files related to the CarMaintenance App.
 */
 package com.source.car_maintenance;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import org.slf4j.LoggerFactory;
 import ch.qos.logback.classic.Logger;
-import java.io.*;
-
 /**
  * @class CarMaintenance
  * @brief Implementation file for car maintenance library functions.
@@ -398,7 +397,17 @@ public class CarMaintenance {
   * @return -1 on fail.
   */
   public int RegisterServiceHistoryRecord(String vehicleModel,int serviceKm,String serviceProvider,int serviceCost,String fileName) {
-	  return 0;
+	  String record = String.format("%s   %d   %s   %d", vehicleModel, serviceKm, serviceProvider, serviceCost);
+      
+	  if (new File(fileName).exists()) {
+          FileAppend(fileName, record);
+          return 0;
+      }
+      else {
+          FileWrite(fileName, "VEHICLE MODEL | SERVICE KM | SERVICE PROVIDER | SERVICE COST");
+          FileAppend(fileName, record);
+          return 0;
+      }
   }
   /**
    * @brief This function edit the records in service_history_records.bin.
@@ -408,7 +417,15 @@ public class CarMaintenance {
    * @return -1 on fail.
    */
   public int EditServiceHistoryRecord(int lineNumberToEdit,String vehicleModel,int serviceKm,String serviceProvider,int serviceCost,String fileName) {
-	  return 0;
+	  String record = String.format("%s   %d   %s   %d", vehicleModel, serviceKm, serviceProvider, serviceCost);
+      if (FileEdit(fileName, lineNumberToEdit, record) == 0)
+      {
+          return 0;
+      }
+      else
+      {
+          return -1;
+      }
   }
   /**
   * @brief This function register records to expense_logging_records.bin.
@@ -418,7 +435,14 @@ public class CarMaintenance {
   * @return -1 on fail.
   */
   public int DeleteServiceHistoryRecord(int lineNumberToDelete,String fileName) {
-	  return 0;
+      if (FileLineDelete(fileName, lineNumberToDelete) == 0)
+      {
+          return 0;
+      }
+      else
+      {
+          return -1;
+      }
   }
   
   
@@ -430,7 +454,17 @@ public class CarMaintenance {
   * @return -1 on fail.
   */
   public int RegisterMaintenanceReminderRecord(String vehicleModel, int serviceKm, String ServiceType, String fileName) {
-	  return 0;
+	  String record = String.format("%s   %d   %s", vehicleModel, serviceKm, ServiceType);
+      
+	  if (new File(fileName).exists()) {
+          FileAppend(fileName, record);
+          return 0;
+      }
+      else {
+          FileWrite(fileName, "VEHICLE MODEL | SERVICE KM | PLANNED SERVICE TYPE");
+          FileAppend(fileName, record);
+          return 0;
+      }
   }
   /**
    * @brief This function edit the records in maintenance_reminder_records.bin.
@@ -439,8 +473,16 @@ public class CarMaintenance {
    * @return 0 on success.
    * @return -1 on fail.
    */
-  public int EditMaintenanceReminderRecord(int lineNumbertoEdit, String vehicleModel, int serviceKm, String ServiceType, String fileName) {
-	  return 0;
+  public int EditMaintenanceReminderRecord(int lineNumberToEdit, String vehicleModel, int serviceKm, String ServiceType, String fileName) {
+	  String record = String.format("%s   %d   %s", vehicleModel, serviceKm, ServiceType);
+      if (FileEdit(fileName, lineNumberToEdit, record) == 0)
+      {
+          return 0;
+      }
+      else
+      {
+          return -1;
+      }
   }
   /**
    * @brief This function delete the records in maintenance_reminder_records.bin.
@@ -449,8 +491,15 @@ public class CarMaintenance {
    * @return 0 on success.
    * @return -1 on fail.
    */
-  public int DeleteMaintenanceReminderRecord(int lineNumbertoDelete, String fileName) {
-	  return 0;
+  public int DeleteMaintenanceReminderRecord(int lineNumberToDelete, String fileName) {
+      if (FileLineDelete(fileName, lineNumberToDelete) == 0)
+      {
+          return 0;
+      }
+      else
+      {
+          return -1;
+      }
   }
   
   
@@ -462,8 +511,18 @@ public class CarMaintenance {
   * @return -1 on fail.
   */
   public int RegisterExpenseRecord(String carModel, String expenseDate, String expenseType, int expense,String fileName) {
-	  return 0;
-  }
+	  String record = carModel + " " + expenseDate + " " + expenseType + " " + expense;
+	  
+	  if (new File(fileName).exists()) {
+		  FileAppend(fileName, record);
+          return -1;
+      
+	  } else {
+		  FileWrite(fileName, "CAR MODEL | EXPENSE DATE | EXPENSE TYPE | EXPENSE");
+		  FileAppend(fileName, record);
+		  return 0;
+	  }
+   }
   /**
   * @brief This function edit records to expense_logging_records.bin.
   *
@@ -472,7 +531,13 @@ public class CarMaintenance {
   * @return -1 on fail.
    */
   public int EditExpenseRecord(int lineNumbertoEdit,String carModel, String expenseDate, String expenseType, int expense, String fileName) {
-	  return 0;
+	 String record = carModel + " " + expenseDate + "  " + expenseType + " " + expense;
+	  
+	if(FileEdit(fileName, lineNumbertoEdit, record) == 0) {
+		return 0;
+    } else {
+    	return -1;
+    }
   }
   /**
   * @brief This function delete records to expense_logging_records.bin.
@@ -482,8 +547,12 @@ public class CarMaintenance {
   * @return -1 on fail.
   */
   public int DeleteExpenseRecord(int lineNumbertoDelete,String fileName) {
-	  return 0;
-  }
+	  if(FileLineDelete(fileName, lineNumbertoDelete) == 0) {
+		  return 0;
+	  } else {
+		  return -1;
+	  }
+}
   
   
   /**

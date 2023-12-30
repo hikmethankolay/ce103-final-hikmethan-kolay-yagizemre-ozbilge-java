@@ -564,7 +564,7 @@ public class CarMaintenance {
   */
   public int RegisterFuelEfficiencyRecord(String carModel , float fuelConsumed, float roadTraveled, String fileName) {
 	  float efficiency = (fuelConsumed/roadTraveled) * 100;
-	  String record = carModel + " " + efficiency;
+	  String record = carModel + "   " + efficiency;
 	  
 	  if(new File(fileName).exists()) {
 		  FileAppend(fileName, record);
@@ -585,13 +585,13 @@ public class CarMaintenance {
   */
   public int EditFuelEfficiencyRecord(int lineNumberToEdit, String carModel, float fuelConsumed, float roadTraveled, String fileName) {
 	  float efficiency = (fuelConsumed/roadTraveled) * 100;
-	  String record = carModel + " " + efficiency;
+	  String record = carModel + "   " + efficiency;
 	  
 	  if(FileEdit(fileName, lineNumberToEdit, record) == 0) {
-	  return 0;
-  } else {
-	  return -1;
-  }
+		  return 0;
+	  } else {
+		  return -1;
+	  }
 }
   /**
   * @brief This function delete the records in fuel_efficiency_records.bin.
@@ -603,9 +603,10 @@ public class CarMaintenance {
   public int DeleteFuelEfficiencyRecord(int lineNumberToDelete,String fileName) {
 	  if(FileLineDelete(fileName, lineNumberToDelete) == 0) {
 	      return 0;
-      } else {
+      } 
+	  else {
 	    return -1;
-    }
+      }
    }
 }
   

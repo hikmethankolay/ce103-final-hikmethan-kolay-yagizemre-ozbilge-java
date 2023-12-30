@@ -20,6 +20,9 @@ import org.slf4j.LoggerFactory;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import ch.qos.logback.classic.Logger;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 /**
  * @class CarMaintenance
  * @brief Implementation file for car maintenance library functions.
@@ -366,8 +369,18 @@ public class CarMaintenance {
   * @return -1 on fail.
   */
   public int RegisterExpenseRecord(String carModel, String expenseDate, String expenseType, int expense,String fileName) {
-	  return 0;
-  }
+	  String record = carModel + " " + expenseDate + " " + expenseType + " " + expense;
+	  
+	  if (!new File(fileName).exists()) {
+          System.out.println("There is no user info. Please register first.");
+          return -1;
+      
+	  } else {
+		  FileWrite(fileName, "CAR MODEL | EXPENSE DATE | EXPENSE TYPE | EXPENSE");
+		  FileAppend(fileName, record);
+		  return 0;
+	  }
+   }
   /**
   * @brief This function edit records to expense_logging_records.bin.
   *

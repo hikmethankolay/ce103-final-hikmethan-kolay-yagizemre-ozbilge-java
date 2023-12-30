@@ -10,11 +10,10 @@
  * @brief The com.source.car_maintenance package contains all the classes and files related to the CarMaintenance App.
 */
 package com.source.car_maintenance;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import org.slf4j.LoggerFactory;
 import ch.qos.logback.classic.Logger;
-import java.io.*;
-
 /**
  * @class CarMaintenance
  * @brief Implementation file for car maintenance library functions.
@@ -512,8 +511,18 @@ public class CarMaintenance {
   * @return -1 on fail.
   */
   public int RegisterExpenseRecord(String carModel, String expenseDate, String expenseType, int expense,String fileName) {
-	  return 0;
-  }
+	  String record = carModel + " " + expenseDate + " " + expenseType + " " + expense;
+	  
+	  if (new File(fileName).exists()) {
+		  FileAppend(fileName, record);
+          return -1;
+      
+	  } else {
+		  FileWrite(fileName, "CAR MODEL | EXPENSE DATE | EXPENSE TYPE | EXPENSE");
+		  FileAppend(fileName, record);
+		  return 0;
+	  }
+   }
   /**
   * @brief This function edit records to expense_logging_records.bin.
   *
@@ -522,7 +531,13 @@ public class CarMaintenance {
   * @return -1 on fail.
    */
   public int EditExpenseRecord(int lineNumbertoEdit,String carModel, String expenseDate, String expenseType, int expense, String fileName) {
-	  return 0;
+	 String record = carModel + " " + expenseDate + "  " + expenseType + " " + expense;
+	  
+	if(FileEdit(fileName, lineNumbertoEdit, record) == 0) {
+		return 0;
+    } else {
+    	return -1;
+    }
   }
   /**
   * @brief This function delete records to expense_logging_records.bin.
@@ -532,8 +547,12 @@ public class CarMaintenance {
   * @return -1 on fail.
   */
   public int DeleteExpenseRecord(int lineNumbertoDelete,String fileName) {
-	  return 0;
-  }
+	  if(FileLineDelete(fileName, lineNumbertoDelete) == 0) {
+		  return 0;
+	  } else {
+		  return -1;
+	  }
+}
   
   
   /**

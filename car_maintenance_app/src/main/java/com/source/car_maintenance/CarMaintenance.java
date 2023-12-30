@@ -405,8 +405,12 @@ public class CarMaintenance {
   * @return -1 on fail.
   */
   public int DeleteExpenseRecord(int lineNumbertoDelete,String fileName) {
+	  if(FileLineDelete(fileName, lineNumbertoDelete) == 0) {
 	  return 0;
+  } else {
+	  return -1;
   }
+}
   
   
   /**

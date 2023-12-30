@@ -203,4 +203,132 @@ public void TestUserChangePasswordFail_2()
     assertEquals(fail, car.UserChangePassword("recoverykeyaaa", "newpassword", "usertest_3.bin"));
 }
 
+@Test
+public void TestRegisterService()
+{
+    CarMaintenance car = new CarMaintenance();
+    testString = "0-)VEHICLE MODEL | SERVICE KM | SERVICE PROVIDER | SERVICE COST\n1-)Audi   10500   Service   1500\n";
+    car.RegisterServiceHistoryRecord("Audi", 10500, "Service", 1500, "service_history_test.bin");
+    assertEquals(testString, car.FileRead("service_history_test.bin"));
+}
+
+@Test
+public void TestRegisterService_2()
+{
+    CarMaintenance car = new CarMaintenance();
+    testString = "0-)VEHICLE MODEL | SERVICE KM | SERVICE PROVIDER | SERVICE COST\n1-)Audi   10500   Service   1500\n2-)Ferrari   12500   Service   1900\n";
+    car.RegisterServiceHistoryRecord("Ferrari", 12500, "Service", 1900, "service_history_test_2.bin");
+    assertEquals(testString, car.FileRead("service_history_test_2.bin"));
+}
+
+@Test
+public void TestEditService()
+{
+    CarMaintenance car = new CarMaintenance();
+    testString = "0-)VEHICLE MODEL | SERVICE KM | SERVICE PROVIDER | SERVICE COST\n1-)Mercedes   12500   Service   1700\n";
+    car.EditServiceHistoryRecord(1, "Mercedes", 12500, "Service", 1700, "service_history_test_3.bin");
+    assertEquals(testString, car.FileRead("service_history_test_3.bin"));
+}
+
+@Test
+public void TestEditServiceFail()
+{
+    CarMaintenance car = new CarMaintenance();
+    assertEquals(fail, car.EditServiceHistoryRecord(1, "Mercedes", 12500, "Service", 1700, "service_history_testfail.bin"));
+}
+
+@Test
+public void TestEditServiceFail_2()
+{
+    CarMaintenance car = new CarMaintenance();
+    assertEquals(fail, car.EditServiceHistoryRecord(7, "Mercedes", 12500, "Service", 1700, "service_history_test.bin"));
+}
+
+@Test
+public void TestDeleteService()
+{
+    CarMaintenance car = new CarMaintenance();
+    testString = "0-)VEHICLE MODEL | SERVICE KM | SERVICE PROVIDER | SERVICE COST\n";
+    car.DeleteServiceHistoryRecord(1, "service_history_test_4.bin");
+    assertEquals(testString, car.FileRead("service_history_test_4.bin"));
+}
+
+@Test
+public void TestDeleteServiceFail()
+{
+    CarMaintenance car = new CarMaintenance();
+    assertEquals(fail, car.DeleteServiceHistoryRecord(1, "service_history_testfail.bin"));
+}
+
+@Test
+public void TestDeleteServiceFail_2()
+{
+    CarMaintenance car = new CarMaintenance();
+    assertEquals(fail, car.DeleteServiceHistoryRecord(9,"service_history_test.bin"));
+}
+
+@Test
+public void TestRegisterReminder()
+{
+    CarMaintenance car = new CarMaintenance();
+    testString = "0-)VEHICLE MODEL | SERVICE KM | PLANNED SERVICE TYPE\n1-)Audi   1000   Brake\n";
+    car.RegisterMaintenanceReminderRecord("Audi",1000,"Brake", "reminder_logging_records_test.bin");
+    assertEquals(testString, car.FileRead("reminder_logging_records_test.bin"));
+
+}
+@Test
+public void TestRegisterReminder_2()
+{
+    CarMaintenance car = new CarMaintenance();
+    testString = "0-)VEHICLE MODEL | SERVICE KM | PLANNED SERVICE TYPE\n1-)Audi   1000   Brake\n2-)Ferrari   2000   Brake\n";
+    car.RegisterMaintenanceReminderRecord("Ferrari",2000,"Brake", "reminder_logging_records_test_2.bin");
+    assertEquals(testString, car.FileRead("reminder_logging_records_test_2.bin"));
+}
+
+@Test
+public void TestEditReminder()
+{
+    CarMaintenance car = new CarMaintenance();
+    testString = "0-)VEHICLE MODEL | SERVICE KM | PLANNED SERVICE TYPE\n1-)Mercedes   1100   Oil\n";
+    car.EditMaintenanceReminderRecord(1,"Mercedes", 1100, "Oil", "reminder_logging_records_test_3.bin");
+    assertEquals(testString, car.FileRead("reminder_logging_records_test_3.bin"));
+    
+}
+@Test
+public void TestEditReminderFail()
+{
+    CarMaintenance car = new CarMaintenance();
+    assertEquals(fail, car.EditMaintenanceReminderRecord(1,"Mercedes", 1100, "Oil", "reminder_logging_records_testaaa.bin"));
+
+}
+@Test
+public void TestEditReminderFail_2()
+{
+    CarMaintenance car = new CarMaintenance();
+    assertEquals(fail, car.EditMaintenanceReminderRecord(6,"Mercedes", 1100, "Oil", "reminder_logging_records_test.bin"));
+
+}
+@Test
+public void TestDeleteReminder()
+{
+    CarMaintenance car = new CarMaintenance();
+    testString = "0-)VEHICLE MODEL | SERVICE KM | PLANNED SERVICE TYPE\n";
+    car.DeleteMaintenanceReminderRecord(1, "reminder_logging_records_test_4.bin");
+    assertEquals(testString, car.FileRead("reminder_logging_records_test_4.bin"));
+
+}
+@Test
+public void TestDeleteReminderFail()
+{
+    CarMaintenance car = new CarMaintenance();
+    assertEquals(fail, car.DeleteMaintenanceReminderRecord(1, "reminder_logging_records_testaaaa.bin"));
+
+}
+@Test
+public void TestDeleteReminderFail_2()
+{
+    CarMaintenance car = new CarMaintenance();
+    assertEquals(fail, car.DeleteMaintenanceReminderRecord(6, "reminder_logging_records_test.bin"));
+
+}
 }

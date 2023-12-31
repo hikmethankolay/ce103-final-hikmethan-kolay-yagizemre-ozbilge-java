@@ -88,7 +88,7 @@ public class CarMaintenanceAppTest {
       System.setIn(originalIn);
       System.setOut(originalOut);
       // Assert the desired behavior based on the output
-      String loginMenu = "----------Login----------\n1-)Login\n2-)Register\n3-)Change Password\n4-)ExitMake a choice(1-4): \nPlease enter username:\nPlease enter password:\nThere is no user info. Please register first.\n";
+      String loginMenu = "----------Login----------\n1-)Login\n2-)Register\n3-)Change Password\n4-)ExitMake a choice(1-4): \nPlease enter username:\nPlease enter password:\nThere is no user info. Please register first.\n----------Login----------\n1-)Login\n2-)Register\n3-)Change Password\n4-)ExitMake a choice(1-4): \n";
       
       // Use assertEquals to compare the expected and actual output as strings
       assertEquals(loginMenu, outputStream.toString());

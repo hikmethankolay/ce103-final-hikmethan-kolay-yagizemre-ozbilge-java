@@ -68,14 +68,25 @@ public class CarMaintenanceApp {
           System.out.println("3-)Change Password");
           System.out.println("4-)Exit");
           System.out.print("Make a choice(1-4): ");
+    	    if (args != null && args.length > 0) {
+    	    	login_menu = Integer.valueOf(args[0]);
+    	    } else {
 
-          login_menu = scanner.nextInt();
+    	          login_menu = scanner.nextInt();
+    	    }
           CarMaintenance car = new CarMaintenance();
-          if(login_menu == 1 || args[0].equals("1")){
-              System.out.println("Please enter username:");
-              username = scanner.next();
-              System.out.println("Please enter password:");
-              password = scanner.next();
+          if(login_menu == 1){
+        	    if (args != null && args.length > 0) {
+        	    	System.out.println("Please enter username:");
+        	        username = args[1];
+        	        System.out.println("Please enter password:");
+        	        password = args[2];
+        	    } else {
+        	        System.out.println("Please enter username:");
+        	        username = scanner.next();
+        	        System.out.println("Please enter password:");
+        	        password = scanner.next();
+        	    }
 
               if (car.UserLogin(username, password,"user.bin") == 0) {
                   boolean run_2 = true;

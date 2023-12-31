@@ -64,73 +64,33 @@ public class CarMaintenanceAppTest {
   }
 
   /**
-   * @brief Test method to validate the successful execution of the main method.
+   * @brief Test method to validate the failed execution of the main method.
    *
    * @details This method redirects the System.in and System.out streams to simulate user input and capture the output. It calls the main method of CarMaintenanceApp with a valid argument and asserts the expected behavior based on the output.
    */
   @Test
-  public void testMainSuccess() {
-    // Redirect System.in and System.out
-    InputStream originalIn = System.in;
-    PrintStream originalOut = System.out;
-    // Create a ByteArrayInputStream with the desired input
-    String input = System.lineSeparator(); // Pressing "Enter" key
-    ByteArrayInputStream inputStream = new ByteArrayInputStream(input.getBytes());
-    // Redirect System.in to the ByteArrayInputStream
-    System.setIn(inputStream);
-    // Create a ByteArrayOutputStream to capture the output
-    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-    System.setOut(new PrintStream(outputStream));
-    String[] args = new String[] {"0"};
-    // Call the main method of CarMaintenanceApp
-    CarMaintenanceApp.main(args);
-    // Restore original System.in and System.out
-    System.setIn(originalIn);
-    System.setOut(originalOut);
-    // Assert the desired behavior based on the output
-    assertTrue(true);
+  public void testMainLoginFail() {
+      // Redirect System.in and System.out
+      InputStream originalIn = System.in;
+      PrintStream originalOut = System.out;
+      // Create a ByteArrayInputStream with the desired input
+      String input = System.lineSeparator(); // Pressing "Enter" key
+      ByteArrayInputStream inputStream = new ByteArrayInputStream(input.getBytes());
+      // Redirect System.in to the ByteArrayInputStream
+      System.setIn(inputStream);
+      // Create a ByteArrayOutputStream to capture the output
+      ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+      System.setOut(new PrintStream(outputStream));
+      String[] args = new String[] {"1","username","password"};
+      // Call the main method of CarMaintenanceApp
+      CarMaintenanceApp.main(args);
+      // Restore original System.in and System.out
+      System.setIn(originalIn);
+      System.setOut(originalOut);
+      // Assert the desired behavior based on the output
+      String loginMenu = "----------Login----------\n1-)Login\n2-)Register\n3-)Change Password\n4-)ExitMake a choice(1-4): \nPlease enter username:\nPlease enter password:\nThere is no user info. Please register first.\n";
+      
+      // Use assertEquals to compare the expected and actual output as strings
+      assertEquals(loginMenu, outputStream.toString());
   }
-
-  /**
-   * @brief Test method to validate the object creation of CarMaintenanceApp.
-   *
-   * @details This method creates an instance of the CarMaintenanceApp class and asserts the successful creation of the object.
-   */
-  @Test
-  public void testMainObject() {
-    // Creating an instance of CarMaintenanceApp
-    @SuppressWarnings("unused")
-	CarMaintenanceApp app = new CarMaintenanceApp();
-    // Asserting the successful creation of the object
-    assertTrue(true);
-  }
-
-  /**
-   * @brief Test method to validate the error handling of the main method.
-   *
-   * @details This method redirects the System.in and System.out streams to simulate user input and capture the output. It calls the main method of CarMaintenanceApp with an invalid argument and asserts the expected behavior based on the output.
-   */
-  @Test
-  public void testMainError() {
-    // Redirect System.in and System.out
-    InputStream originalIn = System.in;
-    PrintStream originalOut = System.out;
-    // Create a ByteArrayInputStream with the desired input
-    String input = System.lineSeparator(); // Pressing "Enter" key
-    ByteArrayInputStream inputStream = new ByteArrayInputStream(input.getBytes());
-    // Redirect System.in to the ByteArrayInputStream
-    System.setIn(inputStream);
-    // Create a ByteArrayOutputStream to capture the output
-    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-    System.setOut(new PrintStream(outputStream));
-    String[] args = new String[] {"1"};
-    // Call the main method of CarMaintenanceApp
-    CarMaintenanceApp.main(args);
-    // Restore original System.in and System.out
-    System.setIn(originalIn);
-    System.setOut(originalOut);
-    // Assert the desired behavior based on the output
-    assertTrue(true);
-  }
-
 }

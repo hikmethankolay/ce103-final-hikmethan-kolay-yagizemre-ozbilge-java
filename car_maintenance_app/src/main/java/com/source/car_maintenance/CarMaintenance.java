@@ -288,7 +288,7 @@ public class CarMaintenance {
       int count = 0;
 
       if (!new File(userFile).exists()) {
-          System.out.println("There is no user info. Please register first.");
+          System.out.print("There is no user info. Please register first.\n");
           return -1;
       }
 

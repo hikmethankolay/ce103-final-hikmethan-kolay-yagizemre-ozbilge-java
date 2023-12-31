@@ -60,31 +60,40 @@ public class CarMaintenanceApp {
       String choice;
       String username;
       String password;
+      int loop_count = 0;
 
       do {
-          System.out.println("----------Login----------");
-          System.out.println("1-)Login");
-          System.out.println("2-)Register");
-          System.out.println("3-)Change Password");
-          System.out.println("4-)Exit");
-          System.out.print("Make a choice(1-4): ");
+          String Output = "----------Login----------\n" +
+                  "1-)Login\n" +
+                  "2-)Register\n" +
+                  "3-)Change Password\n" +
+                  "4-)Exit\n" +
+                  "Make a choice(1-4): \n";
+          	System.out.print(Output);
     	    if (args != null && args.length > 0) {
-    	    	login_menu = Integer.valueOf(args[0]);
+    	    	if(loop_count != 0) {
+    	    		login_menu = Integer.valueOf(args[args.length -1]);
+    	    	}
+    	    	else {
+    	    		login_menu = Integer.valueOf(args[0]);
+    	    		loop_count++;
+    	    	}
+
     	    } else {
 
-    	          login_menu = scanner.nextInt();
+    	        login_menu = scanner.nextInt();
     	    }
           CarMaintenance car = new CarMaintenance();
           if(login_menu == 1){
         	    if (args != null && args.length > 0) {
-        	    	System.out.println("Please enter username:");
+        	    	System.out.print("Please enter username:\n");
         	        username = args[1];
-        	        System.out.println("Please enter password:");
+        	        System.out.print("Please enter password:\n");
         	        password = args[2];
         	    } else {
-        	        System.out.println("Please enter username:");
+        	        System.out.print("Please enter username:\n");
         	        username = scanner.next();
-        	        System.out.println("Please enter password:");
+        	        System.out.print("Please enter password:\n");
         	        password = scanner.next();
         	    }
 
@@ -426,7 +435,7 @@ public class CarMaintenanceApp {
                       }
                   } while (run_2);
               } else {
-                  continue;
+            	  continue;
               }
           }
           else if(login_menu == 2) {

@@ -96,6 +96,7 @@ public class CarMaintenanceApp {
                       int lineNumberToEdit;
                       int lineNumberToDelete;
                       String carModel;
+                      int main_loop_count = 0;
                       
                       System.out.println("\n----------Main Menu----------");
                       System.out.println("1-)Service History Tracking");
@@ -104,7 +105,9 @@ public class CarMaintenanceApp {
                       System.out.println("4-)Fuel Efficiency Reports");
                       System.out.println("5-)Back to login menu");
                       System.out.print("Make a choice(1-5): ");
-                      main_menu = scanner.nextInt();
+                      main_menu = (args != null && args.length > 0) ? Integer.valueOf(main_loop_count == 0 ? args[3] : args[args.length - 2]) : scanner.nextInt();
+                      main_loop_count++;
+                      
                       if(main_menu == 1) {
 
 
@@ -115,7 +118,7 @@ public class CarMaintenanceApp {
                           System.out.println("4-)Delete Service History Record");
                           System.out.println("5-)Previous Menu");
                           System.out.print("Make a choice(1-5): ");
-                          service_menu = scanner.nextInt();
+                          service_menu = ((args != null && args.length > 0) ? Integer.valueOf(args[4]) : Integer.valueOf(scanner.next()));
 
                           if (service_menu == 1) {
                               System.out.println("-------------------------------------------------------");
@@ -124,40 +127,40 @@ public class CarMaintenanceApp {
                               continue;
                           } else if (service_menu == 2) {
                               System.out.print("What is the model of vehicle? ");
-                              vehicleModel = scanner.next();
+                              vehicleModel = ((args != null && args.length > 0) ? args[5] : scanner.next());
 
                               System.out.print("What is the service KM? ");
-                              serviceKm = scanner.nextInt();
+                              serviceKm = ((args != null && args.length > 0) ? Integer.valueOf(args[6]) : Integer.valueOf(scanner.next()));
 
                               System.out.print("Who is the service provider? ");
-                              serviceProvider = scanner.next();
+                              serviceProvider = ((args != null && args.length > 0) ? args[7] : scanner.next());
 
                               System.out.print("What is the service cost? ");
-                              serviceCost = scanner.nextInt();
+                              serviceCost = ((args != null && args.length > 0) ? Integer.valueOf(args[8]) : Integer.valueOf(scanner.next()));
 
                               car.RegisterServiceHistoryRecord(vehicleModel, serviceKm, serviceProvider, serviceCost,"service_history_records.bin");
                               continue;
                           } else if (service_menu == 3) {
                               System.out.print("Which line do you want to edit? ");
-                              lineNumberToEdit = scanner.nextInt();
+                              lineNumberToEdit = ((args != null && args.length > 0) ? Integer.valueOf(args[5]) : Integer.valueOf(scanner.next()));
 
                               System.out.print("What is the model of vehicle? ");
-                              vehicleModel = scanner.next();
+                              vehicleModel = ((args != null && args.length > 0) ? args[6] : scanner.next());
 
                               System.out.print("What is the service KM? ");
-                              serviceKm = scanner.nextInt();
+                              serviceKm = ((args != null && args.length > 0) ? Integer.valueOf(args[7]) : Integer.valueOf(scanner.next()));
 
                               System.out.print("Who is the service provider? ");
-                              serviceProvider = scanner.next();
+                              serviceProvider = ((args != null && args.length > 0) ? args[8] : scanner.next());
 
                               System.out.print("What is the service cost? ");
-                              serviceCost = scanner.nextInt();
+                              serviceCost = ((args != null && args.length > 0) ? Integer.valueOf(args[9]) : Integer.valueOf(scanner.next()));
 
                               car.EditServiceHistoryRecord(lineNumberToEdit, vehicleModel, serviceKm, serviceProvider, serviceCost,"service_history_records.bin");
                               continue;
                           } else if (service_menu == 4) {
                               System.out.print("Which line do you want to delete? ");
-                              lineNumberToDelete = scanner.nextInt();
+                              lineNumberToDelete = ((args != null && args.length > 0) ? Integer.valueOf(args[5]) : Integer.valueOf(scanner.next()));
 
                               car.DeleteServiceHistoryRecord(lineNumberToDelete,"service_history_records.bin");
                               continue;
@@ -422,15 +425,15 @@ public class CarMaintenanceApp {
           }
           else if(login_menu == 2) {
               System.out.print("Do you understand that if you create a new account all the records that have been saved so far will be deleted?[Y/N]: ");
-              choice = scanner.next();
+              choice = ((args != null && args.length > 0) ? args[1] : scanner.next());
               if (choice.equals("Y")) {
                   System.out.println("Please enter a new username: ");
-                  newUsername = scanner.next();
+                  newUsername = ((args != null && args.length > 0) ? args[2] : scanner.next());
                   System.out.println("Please enter a new password: ");
-                  newPassword = scanner.next();
+                  newPassword = ((args != null && args.length > 0) ? args[3] : scanner.next());
                   System.out.println("\nWARNING!!!\nYou will use this to change password if needed, if you lost this you can't access logs without them being completely deleted\nWARNING!!!\n");
                   System.out.println("Please enter a new recovery key: ");
-                  newRecoveryKey = scanner.next();
+                  newRecoveryKey = ((args != null && args.length > 0) ? args[4] : scanner.next());
                   car.UserRegister(newUsername, newPassword, newRecoveryKey,"user.bin");
               }
 
@@ -441,10 +444,10 @@ public class CarMaintenanceApp {
               String changedPassword;
 
               System.out.print("Please enter your recovery key: ");
-              recoveryKey = scanner.next();
+              recoveryKey = ((args != null && args.length > 0) ? args[1] : scanner.next());
 
               System.out.print("Please enter a new password: ");
-              changedPassword = scanner.next();
+              changedPassword = ((args != null && args.length > 0) ? args[2] : scanner.next());
 
               car.UserChangePassword(recoveryKey, changedPassword,"user.bin");
               continue;

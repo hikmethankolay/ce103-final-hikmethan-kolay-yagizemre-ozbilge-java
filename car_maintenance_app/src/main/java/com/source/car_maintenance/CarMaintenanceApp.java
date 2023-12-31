@@ -114,7 +114,7 @@ public class CarMaintenanceApp {
                       System.out.println("5-)Back to login menu");
                       System.out.print("Make a choice(1-5): ");
                       main_menu = scanner.nextInt();
-                      if(main_menu == 1 || args[1].equals("1")) {
+                      if(main_menu == 1) {
 
 
                           System.out.println("\n----------Service History Tracking----------");
@@ -176,7 +176,7 @@ public class CarMaintenanceApp {
                               continue;
                           }
                       }
-                      else if(main_menu == 2 || args[1].equals("2")) {
+                      else if(main_menu == 2) {
                     	  String serviceType;
 
                   	    System.out.println("\n----------Maintenance Reminder Records----------");
@@ -250,7 +250,7 @@ public class CarMaintenanceApp {
                   	        continue;
                   	    }
                       }
-                      else if(main_menu == 3 || args[1].equals("3")) {
+                      else if(main_menu == 3) {
                   	    String expenseType;
                   	    String expenseDate;
                   	    int expense;
@@ -327,7 +327,7 @@ public class CarMaintenanceApp {
                   	        continue;
                   	    }
                       }
-                      else if(main_menu == 4 || args[1].equals("4")) {
+                      else if(main_menu == 4) {
                     	  float fuelConsumed;
                   	    float roadTraveled;
 
@@ -416,7 +416,7 @@ public class CarMaintenanceApp {
                   	    }
 
                       }
-                      else if(main_menu == 5 || args[1].equals("5")) {
+                      else if(main_menu == 5) {
                           run_2 = false;
                           break;
                       }
@@ -429,7 +429,7 @@ public class CarMaintenanceApp {
                   continue;
               }
           }
-          else if(login_menu == 2 || args[0].equals("2")) {
+          else if(login_menu == 2) {
               System.out.print("Do you understand that if you create a new account all the records that have been saved so far will be deleted?[Y/N]: ");
               choice = scanner.next();
               if (choice.equals("Y")) {
@@ -445,7 +445,7 @@ public class CarMaintenanceApp {
 
               continue;
           }
-          else if(login_menu == 3 || args[0].equals("3")) {
+          else if(login_menu == 3) {
               String recoveryKey;
               String changedPassword;
 
@@ -458,7 +458,7 @@ public class CarMaintenanceApp {
               car.UserChangePassword(recoveryKey, changedPassword,"user.bin");
               continue;
           }
-          else if(login_menu == 4 || args[0].equals("4")) {
+          else if(login_menu == 4) {
               run = false;
               break;
           }

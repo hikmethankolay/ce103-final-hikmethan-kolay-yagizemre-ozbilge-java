@@ -17,7 +17,9 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.contrib.java.lang.system.SystemOutRule;
 
 import com.source.car_maintenance.CarMaintenanceApp;
 
@@ -30,7 +32,7 @@ import com.source.car_maintenance.CarMaintenanceApp;
 @author Hikmetahn KOLAY/Yagiz Emre OZBILGE
 */
 public class CarMaintenanceAppTest {
-
+	
   /**
    * @brief This method is executed once before all test methods.
    * @throws Exception
@@ -64,33 +66,48 @@ public class CarMaintenanceAppTest {
   }
 
   /**
+   * @brief A rule for tests to work.
+   */
+  @Rule
+  public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
+  /**
    * @brief Test method to validate the failed execution of the main method.
    *
    * @details This method redirects the System.in and System.out streams to simulate user input and capture the output. It calls the main method of CarMaintenanceApp with a valid argument and asserts the expected behavior based on the output.
    */
   @Test
   public void testMainLoginFail() {
-      // Redirect System.in and System.out
-      InputStream originalIn = System.in;
-      PrintStream originalOut = System.out;
-      // Create a ByteArrayInputStream with the desired input
-      String input = System.lineSeparator(); // Pressing "Enter" key
-      ByteArrayInputStream inputStream = new ByteArrayInputStream(input.getBytes());
-      // Redirect System.in to the ByteArrayInputStream
+      // Save original System.in
+      InputStream originalSystemIn = System.in;
+
+      // Simulate user input
+      ByteArrayInputStream inputStream = new ByteArrayInputStream(System.lineSeparator().getBytes());
       System.setIn(inputStream);
-      // Create a ByteArrayOutputStream to capture the output
-      ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-      System.setOut(new PrintStream(outputStream));
-      String[] args = new String[] {"1","username","password"};
+
       // Call the main method of CarMaintenanceApp
+      String[] args = {"1", "username", "password", "4"};
       CarMaintenanceApp.main(args);
-      // Restore original System.in and System.out
-      System.setIn(originalIn);
-      System.setOut(originalOut);
+
+      // Restore original System.in
+      System.setIn(originalSystemIn);
+
       // Assert the desired behavior based on the output
-      String loginMenu = "----------Login----------\n1-)Login\n2-)Register\n3-)Change Password\n4-)ExitMake a choice(1-4): \nPlease enter username:\nPlease enter password:\nThere is no user info. Please register first.\n----------Login----------\n1-)Login\n2-)Register\n3-)Change Password\n4-)ExitMake a choice(1-4): \n";
-      
-      // Use assertEquals to compare the expected and actual output as strings
-      assertEquals(loginMenu, outputStream.toString());
+      String expectedOutput = "----------Login----------\n" +
+              "1-)Login\n" +
+              "2-)Register\n" +
+              "3-)Change Password\n" +
+              "4-)Exit\n" +
+              "Make a choice(1-4): \n" +
+              "Please enter username:\n" +
+              "Please enter password:\n" +
+              "There is no user info. Please register first.\n" +
+              "----------Login----------\n" +
+              "1-)Login\n" +
+              "2-)Register\n" +
+              "3-)Change Password\n" +
+              "4-)Exit\n" +
+              "Make a choice(1-4): \n";
+
+      assertEquals(expectedOutput, systemOutRule.getLog());
   }
 }

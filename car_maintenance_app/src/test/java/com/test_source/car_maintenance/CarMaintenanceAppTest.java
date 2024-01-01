@@ -17,7 +17,9 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.contrib.java.lang.system.SystemOutRule;
 
 import com.source.car_maintenance.CarMaintenanceApp;
 
@@ -30,7 +32,7 @@ import com.source.car_maintenance.CarMaintenanceApp;
 @author Hikmetahn KOLAY/Yagiz Emre OZBILGE
 */
 public class CarMaintenanceAppTest {
-
+	
   /**
    * @brief This method is executed once before all test methods.
    * @throws Exception
@@ -64,73 +66,51 @@ public class CarMaintenanceAppTest {
   }
 
   /**
-   * @brief Test method to validate the successful execution of the main method.
+   * @brief A rule for tests to work.
+   */
+  @Rule
+  public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
+  /**
+   * @brief Test method to validate the failed execution of the main method.
    *
    * @details This method redirects the System.in and System.out streams to simulate user input and capture the output. It calls the main method of CarMaintenanceApp with a valid argument and asserts the expected behavior based on the output.
    */
   @Test
-  public void testMainSuccess() {
-    // Redirect System.in and System.out
-    InputStream originalIn = System.in;
-    PrintStream originalOut = System.out;
-    // Create a ByteArrayInputStream with the desired input
-    String input = System.lineSeparator(); // Pressing "Enter" key
-    ByteArrayInputStream inputStream = new ByteArrayInputStream(input.getBytes());
-    // Redirect System.in to the ByteArrayInputStream
-    System.setIn(inputStream);
-    // Create a ByteArrayOutputStream to capture the output
-    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-    System.setOut(new PrintStream(outputStream));
-    String[] args = new String[] {"0"};
-    // Call the main method of CarMaintenanceApp
-    CarMaintenanceApp.main(args);
-    // Restore original System.in and System.out
-    System.setIn(originalIn);
-    System.setOut(originalOut);
-    // Assert the desired behavior based on the output
-    assertTrue(true);
-  }
+  public void testMainRegister() {
+      // Save original System.in
+      InputStream originalSystemIn = System.in;
 
-  /**
-   * @brief Test method to validate the object creation of CarMaintenanceApp.
-   *
-   * @details This method creates an instance of the CarMaintenanceApp class and asserts the successful creation of the object.
-   */
-  @Test
-  public void testMainObject() {
-    // Creating an instance of CarMaintenanceApp
-    @SuppressWarnings("unused")
-	CarMaintenanceApp app = new CarMaintenanceApp();
-    // Asserting the successful creation of the object
-    assertTrue(true);
-  }
+      // Simulate user input
+      ByteArrayInputStream inputStream = new ByteArrayInputStream(System.lineSeparator().getBytes());
+      System.setIn(inputStream);
 
-  /**
-   * @brief Test method to validate the error handling of the main method.
-   *
-   * @details This method redirects the System.in and System.out streams to simulate user input and capture the output. It calls the main method of CarMaintenanceApp with an invalid argument and asserts the expected behavior based on the output.
-   */
-  @Test
-  public void testMainError() {
-    // Redirect System.in and System.out
-    InputStream originalIn = System.in;
-    PrintStream originalOut = System.out;
-    // Create a ByteArrayInputStream with the desired input
-    String input = System.lineSeparator(); // Pressing "Enter" key
-    ByteArrayInputStream inputStream = new ByteArrayInputStream(input.getBytes());
-    // Redirect System.in to the ByteArrayInputStream
-    System.setIn(inputStream);
-    // Create a ByteArrayOutputStream to capture the output
-    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-    System.setOut(new PrintStream(outputStream));
-    String[] args = new String[] {"1"};
-    // Call the main method of CarMaintenanceApp
-    CarMaintenanceApp.main(args);
-    // Restore original System.in and System.out
-    System.setIn(originalIn);
-    System.setOut(originalOut);
-    // Assert the desired behavior based on the output
-    assertTrue(true);
-  }
+      // Call the main method of CarMaintenanceApp
+      String[] args = {"2","Y","username", "password","recoverykey", "4"};
+      CarMaintenanceApp.main(args);
 
+      // Restore original System.in
+      System.setIn(originalSystemIn);
+
+      // Assert the desired behavior based on the output
+      String expectedOutput = "----------Login----------\n" +
+              "1-)Login\n" +
+              "2-)Register\n" +
+              "3-)Change Password\n" +
+              "4-)Exit\n" +
+              "Make a choice(1-4): \n" +
+              "Do you understand that if you create a new account all the records that have been saved so far will be deleted?[Y/N]: \n" +
+              "Please enter a new username:\n" +
+              "Please enter a new password:\n" +
+              "\nWARNING!!!\nYou will use this to change password if needed, if you lost this you can't access logs without them being completely deleted\nWARNING!!!\n"+
+              "Please enter a new recovery key:\n"+
+              "You Registered succesfully.\n"+
+              "----------Login----------\n" +
+              "1-)Login\n" +
+              "2-)Register\n" +
+              "3-)Change Password\n" +
+              "4-)Exit\n" +
+              "Make a choice(1-4): \n";
+
+      assertEquals(expectedOutput, systemOutRule.getLog());
+  }
 }

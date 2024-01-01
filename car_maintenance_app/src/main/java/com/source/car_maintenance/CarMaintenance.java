@@ -12,8 +12,6 @@
 package com.source.car_maintenance;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import org.slf4j.LoggerFactory;
-import ch.qos.logback.classic.Logger;
 /**
  * @class CarMaintenance
  * @brief Implementation file for car maintenance library functions.
@@ -23,10 +21,26 @@ import ch.qos.logback.classic.Logger;
 public class CarMaintenance {
 
   /**
-   * @brief Logger for the CarMaintenance class.
+   * Delete files.
+   *
+   * @param FileName The name of the file to delete.
+   * @return 0 on success.
+   * @return -1 on fail.
    */
-  private static final Logger logger = (Logger) LoggerFactory.getLogger(CarMaintenance.class);
+  private static int FileDelete(String FileName) {
+      File file = new File(FileName);
 
+      if (file.exists()) {
+          if (file.delete()) {
+        	  return 0;
+          } else {
+        	  return -1;
+          }
+      } else {
+    	  return 0;
+      }
+  }
+  
   /**
    * Opens a binary file, deletes all of its content, and writes given text to it.
    *
@@ -112,7 +126,6 @@ public class CarMaintenance {
                   streamWriter.write(text);
               }
           }
-          logger.info("FileAppend Function worked succesfully");
           return 0;
       } catch (IOException ex) {
           System.out.println("File operation failed.");
@@ -172,7 +185,6 @@ public class CarMaintenance {
           }
 
           System.out.println("\nData successfully edited\n\n");
-          logger.info("FileEdit Function worked succesfully");
           return 0;
       } catch (IOException ex) {
           System.out.println("File operation failed.");
@@ -242,7 +254,6 @@ public class CarMaintenance {
           }
 
           System.out.println("\nData successfully deleted\n\n");
-    	  logger.info("FileLineDelete Function worked succesfully");
           return 0;
       } catch (IOException ex) {
           System.out.println("File operation failed");
@@ -270,8 +281,13 @@ public class CarMaintenance {
       } catch (IOException e) {
           e.printStackTrace();
       }
+      
+      FileDelete("service_history_records.bin");
+      FileDelete("maintenance_reminder_records.bin");
+      FileDelete("expense_records.bin");
+      FileDelete("fuel_efficiency_records.bin");
 
-	  logger.info("UserRegister Function worked succesfully");
+      System.out.print("You Registered succesfully.\n");
 	  return 0;
   }
   /**
@@ -288,7 +304,7 @@ public class CarMaintenance {
       int count = 0;
 
       if (!new File(userFile).exists()) {
-          System.out.println("There is no user info. Please register first.");
+          System.out.print("There is no user info. Please register first.\n");
           return -1;
       }
 
@@ -315,12 +331,10 @@ public class CarMaintenance {
       }
 
       if (username.equals(usernameRead) && password.equals(passwordRead)) {
-          System.out.println("Login Successful");
-          logger.info("UserLogin Function: Login Successful");
+          System.out.print("Login Successful\n");
           return 0;
       } else {
-          System.out.println("Wrong username or password");
-          logger.info("UserLogin Function: Wrong username or password");
+          System.out.print("Wrong username or password\n");
           return -1;
       }
 	  
@@ -340,7 +354,7 @@ public class CarMaintenance {
       int count = 0;
 
       if (!new File(userFile).exists()) {
-          System.out.println("There is no user info. Please register first.");
+          System.out.print("There is no user info. Please register first.\n");
           return -1;
       }
 
@@ -377,13 +391,11 @@ public class CarMaintenance {
               e.printStackTrace();
           }
     	  
-          System.out.println("Password Change Successful");
-          logger.info("UserChangePassword Function: Password Change Successful");
+          System.out.print("Password Change Successful\n");
           return 0;
           
       } else {
-          System.out.println("Wrong Recovery Key");
-          logger.info("UserChangePassword Function: Wrong Recovery Key");
+          System.out.print("Wrong Recovery Key\n");
           return -1;
       }
       

@@ -76,7 +76,7 @@ public class CarMaintenanceAppTest {
    * @details This method redirects the System.in and System.out streams to simulate user input and capture the output. It calls the main method of CarMaintenanceApp with a valid argument and asserts the expected behavior based on the output.
    */
   @Test
-  public void testMainLoginFail() {
+  public void testMainRegister() {
       // Save original System.in
       InputStream originalSystemIn = System.in;
 
@@ -85,7 +85,7 @@ public class CarMaintenanceAppTest {
       System.setIn(inputStream);
 
       // Call the main method of CarMaintenanceApp
-      String[] args = {"1", "username", "password", "4"};
+      String[] args = {"2","Y","username", "password","recoverykey", "4"};
       CarMaintenanceApp.main(args);
 
       // Restore original System.in
@@ -98,9 +98,12 @@ public class CarMaintenanceAppTest {
               "3-)Change Password\n" +
               "4-)Exit\n" +
               "Make a choice(1-4): \n" +
-              "Please enter username:\n" +
-              "Please enter password:\n" +
-              "There is no user info. Please register first.\n" +
+              "Do you understand that if you create a new account all the records that have been saved so far will be deleted?[Y/N]: \n" +
+              "Please enter a new username:\n" +
+              "Please enter a new password:\n" +
+              "\nWARNING!!!\nYou will use this to change password if needed, if you lost this you can't access logs without them being completely deleted\nWARNING!!!\n"+
+              "Please enter a new recovery key:\n"+
+              "You Registered succesfully.\n"+
               "----------Login----------\n" +
               "1-)Login\n" +
               "2-)Register\n" +

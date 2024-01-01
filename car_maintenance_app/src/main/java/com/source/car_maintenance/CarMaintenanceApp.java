@@ -466,7 +466,7 @@ public class CarMaintenanceApp {
               }
           }
           else if(login_menu == 2) {
-              System.out.print("Do you understand that if you create a new account all the records that have been saved so far will be deleted?[Y/N]: ");
+              System.out.print("Do you understand that if you create a new account all the records that have been saved so far will be deleted?[Y/N]: \n");
               choice = ((args != null && args.length > 0) ? args[1] : scanner.next());
               if (choice.equals("Y")) {
                   System.out.print("Please enter a new username:\n");

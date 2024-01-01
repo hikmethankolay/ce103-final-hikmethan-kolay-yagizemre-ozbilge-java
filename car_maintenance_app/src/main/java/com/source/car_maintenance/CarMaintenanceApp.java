@@ -12,12 +12,8 @@
  * 
 */
 package com.source.car_maintenance;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
-
-import org.slf4j.LoggerFactory;
-import ch.qos.logback.classic.Logger;
 
 /**
  *
@@ -30,11 +26,6 @@ import ch.qos.logback.classic.Logger;
  * @author Yagiz Emre OZBILGE
  */
 public class CarMaintenanceApp {
-  /**
-   * @brief Logger for the Car MaintenanceApp class.
-   */
-  private static final Logger logger = (Logger) LoggerFactory.getLogger(CarMaintenanceApp.class);
-
   /**
    * @brief The main entry point of the Car Maintenance App.
    *
@@ -70,9 +61,15 @@ public class CarMaintenanceApp {
                   "4-)Exit\n" +
                   "Make a choice(1-4): \n";
           	System.out.print(login_menu_text);
-          	login_menu = (args != null && args.length > 0) ? Integer.valueOf(loop_count == 0 ? args[0] : args[args.length - 1]) : scanner.nextInt();
-          	loop_count++;
-          	
+            try {
+            	login_menu = (args != null && args.length > 0) ? Integer.valueOf(loop_count == 0 ? args[0] : args[args.length - 1]) : Integer.valueOf(scanner.next());
+            }
+            catch(NumberFormatException e) {
+            	System.out.print("Please use an integer\n");
+            	loop_count++;
+            	continue;
+            }
+            loop_count++;
           CarMaintenance car = new CarMaintenance();
           if(login_menu == 1){
         	  System.out.print("Please enter username:\n");

@@ -391,7 +391,7 @@ public class CarMaintenance {
               e.printStackTrace();
           }
     	  
-          System.out.print("Password Change Successful\n");
+          System.out.print("Password Change is Successful.\n");
           return 0;
           
       } else {

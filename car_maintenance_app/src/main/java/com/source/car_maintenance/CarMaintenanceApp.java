@@ -76,6 +76,7 @@ public class CarMaintenanceApp {
         	  username = ((args != null && args.length > 0) ? args[1] : scanner.next());
         	  System.out.print("Please enter password:\n");
         	  password = ((args != null && args.length > 0) ? args[2] : scanner.next());
+        	  
               if (car.UserLogin(username, password,"user.bin") == 0) {
                   boolean run_2 = true;
                   int main_loop_count = 0;

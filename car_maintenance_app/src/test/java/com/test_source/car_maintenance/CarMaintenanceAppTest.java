@@ -209,4 +209,46 @@ public class CarMaintenanceAppTest {
 
       assertEquals(expectedOutput, systemOutRule.getLog());
   }
+  @Test
+  public void testMainLogin() {
+      // Save original System.in
+      InputStream originalSystemIn = System.in;
+
+      // Simulate user input
+      ByteArrayInputStream inputStream = new ByteArrayInputStream(System.lineSeparator().getBytes());
+      System.setIn(inputStream);
+
+      // Call the main method of CarMaintenanceApp
+      String[] args = {"1", "username", "newpassword", "5","4"};
+      CarMaintenanceApp.main(args);
+
+      // Restore original System.in
+      System.setIn(originalSystemIn);
+
+      // Assert the desired behavior based on the output
+      String expectedOutput = "----------Login----------\n" +
+              "1-)Login\n" +
+              "2-)Register\n" +
+              "3-)Change Password\n" +
+              "4-)Exit\n" +
+              "Make a choice(1-4): \n" +
+              "Please enter username:\n" +
+              "Please enter password:\n" +
+              "Login Successful\n"+
+              "----------Manin Menu----------\n" +
+              "1-)Service History Tracking\n" +
+              "2-)Maintenance Reminders\n" +
+              "3-)Expense Logging\n" +
+              "4-)Fuel Efficiency Reports\n" +
+              "5-)Back to login menu\n" +
+              "Make a choice(1-5): \n"+
+              "----------Login----------\n" +
+              "1-)Login\n" +
+              "2-)Register\n" +
+              "3-)Change Password\n" +
+              "4-)Exit\n" +
+              "Make a choice(1-4): \n";
+
+      assertEquals(expectedOutput, systemOutRule.getLog());
+  }
 }

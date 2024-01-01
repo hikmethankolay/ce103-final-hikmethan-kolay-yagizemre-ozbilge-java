@@ -81,8 +81,7 @@ public class CarMaintenance {
           }
           System.out.println(line);
       } catch (IOException ex) {
-          System.out.println("File operation failed. There is no record.");
-          System.out.println(ex.getMessage());
+          System.out.print("File operation failed. There is no record.\n");
           return "-1";
       }
       return line;
@@ -167,7 +166,7 @@ public class CarMaintenance {
           if (lineNumberToEdit > 0 && lineNumberToEdit <= lineCount) {
               lines[lineNumberToEdit] = lineNumberToEdit + "-)" + newLine + "\n"; // Changes a member of the Lines array to a new line with its line number
           } else {
-              System.out.println("You can only edit existing lines.");
+              System.out.print("You can only edit existing lines.\n");
               return -1;
           }
 
@@ -181,14 +180,14 @@ public class CarMaintenance {
 
                       streamWriter.write(updatedLine);
                   }
+                  
               }
           }
 
-          System.out.println("\nData successfully edited\n\n");
+          System.out.print("Data successfully edited\n");
           return 0;
       } catch (IOException ex) {
-          System.out.println("File operation failed.");
-          System.out.println(ex.getMessage());
+          System.out.print("File operation failed.\n");
           return -1;
       }
   }
@@ -229,7 +228,7 @@ public class CarMaintenance {
 
               lines[lineCount - 1] = "";
           } else {
-              System.out.println("You can only erase existing lines");
+              System.out.print("You can only erase existing lines\n");
               return -1;
           }
 
@@ -253,11 +252,10 @@ public class CarMaintenance {
               }
           }
 
-          System.out.println("\nData successfully deleted\n\n");
+          System.out.print("Data successfully deleted\n");
           return 0;
       } catch (IOException ex) {
-          System.out.println("File operation failed");
-          System.out.println(ex.getMessage());
+          System.out.print("File operation failed\n");
           return -1;
       }
   }

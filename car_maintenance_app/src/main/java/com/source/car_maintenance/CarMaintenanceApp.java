@@ -96,7 +96,7 @@ public class CarMaintenanceApp {
                       String carModel;
                       
                       
-                      String main_menu_text = "----------Manin Menu----------\n" +
+                      String main_menu_text = "----------Main Menu----------\n" +
                               "1-)Service History Tracking\n" +
                               "2-)Maintenance Reminders\n" +
                               "3-)Expense Logging\n" +
@@ -122,9 +122,9 @@ public class CarMaintenanceApp {
                           service_menu = ((args != null && args.length > 0) ? Integer.valueOf(args[4]) : Integer.valueOf(scanner.next()));
 
                           if (service_menu == 1) {
-                              System.out.print("-------------------------------------------------------");
+                              System.out.print("-------------------------------------------------------\n");
                               car.FileRead("service_history_records.bin");
-                              System.out.print("-------------------------------------------------------");
+                              System.out.print("-------------------------------------------------------\n");
                               continue;
                           } else if (service_menu == 2) {
                               System.out.print("What is the model of vehicle?\n");
@@ -188,6 +188,7 @@ public class CarMaintenanceApp {
                     	            System.out.print("Please use an integer\n");
                       	            continue;
                               }
+                              car.EditServiceHistoryRecord(lineNumberToEdit, vehicleModel, serviceKm, serviceProvider, serviceCost,"service_history_records.bin");
                               continue;
                           } else if (service_menu == 4) {
                               System.out.print("Which line do you want to delete?\n");
@@ -324,7 +325,7 @@ public class CarMaintenanceApp {
                   	        car.RegisterExpenseRecord(carModel, expenseDate, expenseType, expense,"expense_logging_records.bin");
                   	        continue;
                   	    } else if (expense_menu == 3) {
-                  	        System.out.print("Which do you want to edit\n");
+                  	        System.out.print("Which line do you want to edit\n");
                             try {
                             	lineNumberToEdit = ((args != null && args.length > 0) ? Integer.valueOf(args[5]) : Integer.valueOf(scanner.next()));
                             }

@@ -385,28 +385,33 @@ public class CarMaintenanceApp {
                   	    fuel_efficiency_menu = ((args != null && args.length > 0) ? Integer.valueOf(args[4]) : Integer.valueOf(scanner.next()));
 
                   	    if (fuel_efficiency_menu == 1) {
-                  	        System.out.print("-------------------------------------------------------");
+                  	        System.out.print("-------------------------------------------------------\n");
                   	        car.FileRead("fuel_efficiency_records.bin");
-                  	        System.out.print("-------------------------------------------------------");
+                  	        System.out.print("-------------------------------------------------------\n");
                   	        continue;
                   	    } else if (fuel_efficiency_menu == 2) {
                   	        System.out.print("What is the model of the car?\n");
-                  	        carModel = ((args != null && args.length > 0) ? args[8] : scanner.next());
+                  	        carModel = ((args != null && args.length > 0) ? args[5] : scanner.next());
+                  	        
+	                  	      System.out.print("What is the traveled total road?\n");
+	                          try {
+	                          	roadTraveled = ((args != null && args.length > 0) ? Float.valueOf(args[6]) : Float.valueOf(scanner.next()));
+	                          }
+	                          catch(NumberFormatException e) {
+	                	            System.out.print("Please use an integer\n");
+	                  	            continue;
+	                          }
+                  	        
+                  	        System.out.print("What is the fuel conssumption on this road?\n");
                             try {
-                            	fuelConsumed = ((args != null && args.length > 0) ? Float.valueOf(args[5]) : Float.valueOf(scanner.next()));
+                            	fuelConsumed = ((args != null && args.length > 0) ? Float.valueOf(args[7]) : Float.valueOf(scanner.next()));
                             }
                             catch(NumberFormatException e) {
                   	            System.out.print("Please use an integer\n");
                     	            continue;
                             }
-
-                            try {
-                            	roadTraveled = ((args != null && args.length > 0) ? Float.valueOf(args[6]) : Float.valueOf(scanner.next()));
-                            }
-                            catch(NumberFormatException e) {
-                  	            System.out.print("Please use an integer\n");
-                    	            continue;
-                            }
+                            
+                            
                   	        car.RegisterFuelEfficiencyRecord(carModel, fuelConsumed, roadTraveled,"fuel_efficiency_records.bin");
                   	        continue;
                   	    } else if (fuel_efficiency_menu == 3) {
@@ -419,15 +424,9 @@ public class CarMaintenanceApp {
                     	            continue;
                             }
                   	        System.out.print("What is the model of the car?\n");
-                  	        carModel = ((args != null && args.length > 0) ? args[8] : scanner.next());
-                            try {
-                            	fuelConsumed = ((args != null && args.length > 0) ? Float.valueOf(args[6]) : Float.valueOf(scanner.next()));
-                            }
-                            catch(NumberFormatException e) {
-                  	            System.out.print("Please use an integer\n");
-                    	            continue;
-                            }
-
+                  	        carModel = ((args != null && args.length > 0) ? args[6] : scanner.next());
+                  	        
+                            System.out.print("What is the traveled total road?\n");
                             try {
                             	roadTraveled = ((args != null && args.length > 0) ? Float.valueOf(args[7]) : Float.valueOf(scanner.next()));
                             }
@@ -435,6 +434,16 @@ public class CarMaintenanceApp {
                   	            System.out.print("Please use an integer\n");
                     	            continue;
                             }
+                  	        
+                  	        System.out.print("What is the fuel conssumption on this road?\n");
+                            try {
+                            	fuelConsumed = ((args != null && args.length > 0) ? Float.valueOf(args[8]) : Float.valueOf(scanner.next()));
+                            }
+                            catch(NumberFormatException e) {
+                  	            System.out.print("Please use an integer\n");
+                    	            continue;
+                            }
+
                   	        car.EditFuelEfficiencyRecord(lineNumberToEdit, carModel, fuelConsumed, roadTraveled,"fuel_efficiency_records.bin");
                   	        continue;
                   	    } else if (fuel_efficiency_menu == 4) {

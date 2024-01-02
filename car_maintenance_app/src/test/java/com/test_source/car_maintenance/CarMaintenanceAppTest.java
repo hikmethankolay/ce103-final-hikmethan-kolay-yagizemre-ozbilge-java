@@ -1899,4 +1899,627 @@ public class CarMaintenanceAppTest {
 
       assertEquals(expectedOutput, systemOutRule.getLog());
   }
+  @Test
+  public void testMain33_FuelShow() {
+      // Save original System.in
+      InputStream originalSystemIn = System.in;
+
+      // Simulate user input
+      ByteArrayInputStream inputStream = new ByteArrayInputStream(System.lineSeparator().getBytes());
+      System.setIn(inputStream);
+
+      // Call the main method of CarMaintenanceApp
+      String[] args = {"1", "username", "newpassword","4","1","5","4"};
+      CarMaintenanceApp.main(args);
+
+      // Restore original System.in
+      System.setIn(originalSystemIn);
+
+      // Assert the desired behavior based on the output
+      String expectedOutput = "----------Login----------\n" +
+              "1-)Login\n" +
+              "2-)Register\n" +
+              "3-)Change Password\n" +
+              "4-)Exit\n" +
+              "Make a choice(1-4): \n" +
+              "Please enter username:\n" +
+              "Please enter password:\n" +
+              "Login Successful\n"+
+              "------------You Have Scheduled Maintenance-------------\n"+
+              "0-)VEHICLE MODEL | SERVICE KM | PLANNED SERVICE TYPE\n"+
+              "-------------------------------------------------------\n"+
+              "----------Main Menu----------\n" +
+              "1-)Service History Tracking\n" +
+              "2-)Maintenance Reminders\n" +
+              "3-)Expense Logging\n" +
+              "4-)Fuel Efficiency Reports\n" +
+              "5-)Back to login menu\n" +
+              "Make a choice(1-5): \n"+
+              "----------Fuel Efficiency Records----------\n" +
+              "1-)Show Fuel Efficiency Records\n" +
+              "2-)Register Fuel Efficiency Records\n" +
+              "3-)Edit Fuel Efficiency Records\n" +
+              "4-)Delete Fuel Efficiency Records\n" +
+              "5-)Previous Menu\n" +
+              "Make a choice(1-5): \n"+
+              "-------------------------------------------------------\n"+
+              "File operation failed. There is no record.\n"+
+              "-------------------------------------------------------\n"+
+              "----------Main Menu----------\n" +
+              "1-)Service History Tracking\n" +
+              "2-)Maintenance Reminders\n" +
+              "3-)Expense Logging\n" +
+              "4-)Fuel Efficiency Reports\n" +
+              "5-)Back to login menu\n" +
+              "Make a choice(1-5): \n"+
+              "----------Login----------\n" +
+              "1-)Login\n" +
+              "2-)Register\n" +
+              "3-)Change Password\n" +
+              "4-)Exit\n" +
+              "Make a choice(1-4): \n";
+
+      assertEquals(expectedOutput, systemOutRule.getLog());
+  }
+  @Test
+  public void testMain34_FuelRegister() {
+      // Save original System.in
+      InputStream originalSystemIn = System.in;
+
+      // Simulate user input
+      ByteArrayInputStream inputStream = new ByteArrayInputStream(System.lineSeparator().getBytes());
+      System.setIn(inputStream);
+
+      // Call the main method of CarMaintenanceApp
+      String[] args = {"1", "username", "newpassword","4","2","Auidi","123","123","5","4"};
+      CarMaintenanceApp.main(args);
+
+      // Restore original System.in
+      System.setIn(originalSystemIn);
+
+      // Assert the desired behavior based on the output
+      String expectedOutput = "----------Login----------\n" +
+              "1-)Login\n" +
+              "2-)Register\n" +
+              "3-)Change Password\n" +
+              "4-)Exit\n" +
+              "Make a choice(1-4): \n" +
+              "Please enter username:\n" +
+              "Please enter password:\n" +
+              "Login Successful\n"+
+              "------------You Have Scheduled Maintenance-------------\n"+
+              "0-)VEHICLE MODEL | SERVICE KM | PLANNED SERVICE TYPE\n"+
+              "-------------------------------------------------------\n"+
+              "----------Main Menu----------\n" +
+              "1-)Service History Tracking\n" +
+              "2-)Maintenance Reminders\n" +
+              "3-)Expense Logging\n" +
+              "4-)Fuel Efficiency Reports\n" +
+              "5-)Back to login menu\n" +
+              "Make a choice(1-5): \n"+
+              "----------Fuel Efficiency Records----------\n" +
+              "1-)Show Fuel Efficiency Records\n" +
+              "2-)Register Fuel Efficiency Records\n" +
+              "3-)Edit Fuel Efficiency Records\n" +
+              "4-)Delete Fuel Efficiency Records\n" +
+              "5-)Previous Menu\n" +
+              "Make a choice(1-5): \n"+
+              "What is the model of the car?\n"+
+              "What is the traveled total road?\n"+
+              "What is the fuel conssumption on this road?\n"+
+              "----------Main Menu----------\n" +
+              "1-)Service History Tracking\n" +
+              "2-)Maintenance Reminders\n" +
+              "3-)Expense Logging\n" +
+              "4-)Fuel Efficiency Reports\n" +
+              "5-)Back to login menu\n" +
+              "Make a choice(1-5): \n"+
+              "----------Login----------\n" +
+              "1-)Login\n" +
+              "2-)Register\n" +
+              "3-)Change Password\n" +
+              "4-)Exit\n" +
+              "Make a choice(1-4): \n";
+
+      assertEquals(expectedOutput, systemOutRule.getLog());
+  }
+  @Test
+  public void testMain35_FuelRegisterFail() {
+      // Save original System.in
+      InputStream originalSystemIn = System.in;
+
+      // Simulate user input
+      ByteArrayInputStream inputStream = new ByteArrayInputStream(System.lineSeparator().getBytes());
+      System.setIn(inputStream);
+
+      // Call the main method of CarMaintenanceApp
+      String[] args = {"1", "username", "newpassword","4","2","Auidi","asd","123","5","4"};
+      CarMaintenanceApp.main(args);
+
+      // Restore original System.in
+      System.setIn(originalSystemIn);
+
+      // Assert the desired behavior based on the output
+      String expectedOutput = "----------Login----------\n" +
+              "1-)Login\n" +
+              "2-)Register\n" +
+              "3-)Change Password\n" +
+              "4-)Exit\n" +
+              "Make a choice(1-4): \n" +
+              "Please enter username:\n" +
+              "Please enter password:\n" +
+              "Login Successful\n"+
+              "------------You Have Scheduled Maintenance-------------\n"+
+              "0-)VEHICLE MODEL | SERVICE KM | PLANNED SERVICE TYPE\n"+
+              "-------------------------------------------------------\n"+
+              "----------Main Menu----------\n" +
+              "1-)Service History Tracking\n" +
+              "2-)Maintenance Reminders\n" +
+              "3-)Expense Logging\n" +
+              "4-)Fuel Efficiency Reports\n" +
+              "5-)Back to login menu\n" +
+              "Make a choice(1-5): \n"+
+              "----------Fuel Efficiency Records----------\n" +
+              "1-)Show Fuel Efficiency Records\n" +
+              "2-)Register Fuel Efficiency Records\n" +
+              "3-)Edit Fuel Efficiency Records\n" +
+              "4-)Delete Fuel Efficiency Records\n" +
+              "5-)Previous Menu\n" +
+              "Make a choice(1-5): \n"+
+              "What is the model of the car?\n"+
+              "What is the traveled total road?\n"+
+              "Please use an integer\n"+
+              "----------Main Menu----------\n" +
+              "1-)Service History Tracking\n" +
+              "2-)Maintenance Reminders\n" +
+              "3-)Expense Logging\n" +
+              "4-)Fuel Efficiency Reports\n" +
+              "5-)Back to login menu\n" +
+              "Make a choice(1-5): \n"+
+              "----------Login----------\n" +
+              "1-)Login\n" +
+              "2-)Register\n" +
+              "3-)Change Password\n" +
+              "4-)Exit\n" +
+              "Make a choice(1-4): \n";
+
+      assertEquals(expectedOutput, systemOutRule.getLog());
+  }
+  @Test
+  public void testMain36_FuelRegisterFail_2() {
+      // Save original System.in
+      InputStream originalSystemIn = System.in;
+
+      // Simulate user input
+      ByteArrayInputStream inputStream = new ByteArrayInputStream(System.lineSeparator().getBytes());
+      System.setIn(inputStream);
+
+      // Call the main method of CarMaintenanceApp
+      String[] args = {"1", "username", "newpassword","4","2","Auidi","123","asd","5","4"};
+      CarMaintenanceApp.main(args);
+
+      // Restore original System.in
+      System.setIn(originalSystemIn);
+
+      // Assert the desired behavior based on the output
+      String expectedOutput = "----------Login----------\n" +
+              "1-)Login\n" +
+              "2-)Register\n" +
+              "3-)Change Password\n" +
+              "4-)Exit\n" +
+              "Make a choice(1-4): \n" +
+              "Please enter username:\n" +
+              "Please enter password:\n" +
+              "Login Successful\n"+
+              "------------You Have Scheduled Maintenance-------------\n"+
+              "0-)VEHICLE MODEL | SERVICE KM | PLANNED SERVICE TYPE\n"+
+              "-------------------------------------------------------\n"+
+              "----------Main Menu----------\n" +
+              "1-)Service History Tracking\n" +
+              "2-)Maintenance Reminders\n" +
+              "3-)Expense Logging\n" +
+              "4-)Fuel Efficiency Reports\n" +
+              "5-)Back to login menu\n" +
+              "Make a choice(1-5): \n"+
+              "----------Fuel Efficiency Records----------\n" +
+              "1-)Show Fuel Efficiency Records\n" +
+              "2-)Register Fuel Efficiency Records\n" +
+              "3-)Edit Fuel Efficiency Records\n" +
+              "4-)Delete Fuel Efficiency Records\n" +
+              "5-)Previous Menu\n" +
+              "Make a choice(1-5): \n"+
+              "What is the model of the car?\n"+
+              "What is the traveled total road?\n"+
+              "What is the fuel conssumption on this road?\n"+
+              "Please use an integer\n"+
+              "----------Main Menu----------\n" +
+              "1-)Service History Tracking\n" +
+              "2-)Maintenance Reminders\n" +
+              "3-)Expense Logging\n" +
+              "4-)Fuel Efficiency Reports\n" +
+              "5-)Back to login menu\n" +
+              "Make a choice(1-5): \n"+
+              "----------Login----------\n" +
+              "1-)Login\n" +
+              "2-)Register\n" +
+              "3-)Change Password\n" +
+              "4-)Exit\n" +
+              "Make a choice(1-4): \n";
+
+      assertEquals(expectedOutput, systemOutRule.getLog());
+  }
+  @Test
+  public void testMain37_FuelEdit() {
+      // Save original System.in
+      InputStream originalSystemIn = System.in;
+
+      // Simulate user input
+      ByteArrayInputStream inputStream = new ByteArrayInputStream(System.lineSeparator().getBytes());
+      System.setIn(inputStream);
+
+      // Call the main method of CarMaintenanceApp
+      String[] args = {"1", "username", "newpassword","4","3","1","Ferrari","456","768","5","4"};
+      CarMaintenanceApp.main(args);
+
+      // Restore original System.in
+      System.setIn(originalSystemIn);
+
+      // Assert the desired behavior based on the output
+      String expectedOutput = "----------Login----------\n" +
+              "1-)Login\n" +
+              "2-)Register\n" +
+              "3-)Change Password\n" +
+              "4-)Exit\n" +
+              "Make a choice(1-4): \n" +
+              "Please enter username:\n" +
+              "Please enter password:\n" +
+              "Login Successful\n"+
+              "------------You Have Scheduled Maintenance-------------\n"+
+              "0-)VEHICLE MODEL | SERVICE KM | PLANNED SERVICE TYPE\n"+
+              "-------------------------------------------------------\n"+
+              "----------Main Menu----------\n" +
+              "1-)Service History Tracking\n" +
+              "2-)Maintenance Reminders\n" +
+              "3-)Expense Logging\n" +
+              "4-)Fuel Efficiency Reports\n" +
+              "5-)Back to login menu\n" +
+              "Make a choice(1-5): \n"+
+              "----------Fuel Efficiency Records----------\n" +
+              "1-)Show Fuel Efficiency Records\n" +
+              "2-)Register Fuel Efficiency Records\n" +
+              "3-)Edit Fuel Efficiency Records\n" +
+              "4-)Delete Fuel Efficiency Records\n" +
+              "5-)Previous Menu\n" +
+              "Make a choice(1-5): \n"+
+              "Which line do you want to edit?\n"+
+              "What is the model of the car?\n"+
+              "What is the traveled total road?\n"+
+              "What is the fuel conssumption on this road?\n"+
+              "Data successfully edited\n"+
+              "----------Main Menu----------\n" +
+              "1-)Service History Tracking\n" +
+              "2-)Maintenance Reminders\n" +
+              "3-)Expense Logging\n" +
+              "4-)Fuel Efficiency Reports\n" +
+              "5-)Back to login menu\n" +
+              "Make a choice(1-5): \n"+
+              "----------Login----------\n" +
+              "1-)Login\n" +
+              "2-)Register\n" +
+              "3-)Change Password\n" +
+              "4-)Exit\n" +
+              "Make a choice(1-4): \n";
+
+      assertEquals(expectedOutput, systemOutRule.getLog());
+  }
+  @Test
+  public void testMain38_FuelEditFail() {
+      // Save original System.in
+      InputStream originalSystemIn = System.in;
+
+      // Simulate user input
+      ByteArrayInputStream inputStream = new ByteArrayInputStream(System.lineSeparator().getBytes());
+      System.setIn(inputStream);
+
+      // Call the main method of CarMaintenanceApp
+      String[] args = {"1", "username", "newpassword","4","3","asdasd","Ferrari","456","768","5","4"};
+      CarMaintenanceApp.main(args);
+
+      // Restore original System.in
+      System.setIn(originalSystemIn);
+
+      // Assert the desired behavior based on the output
+      String expectedOutput = "----------Login----------\n" +
+              "1-)Login\n" +
+              "2-)Register\n" +
+              "3-)Change Password\n" +
+              "4-)Exit\n" +
+              "Make a choice(1-4): \n" +
+              "Please enter username:\n" +
+              "Please enter password:\n" +
+              "Login Successful\n"+
+              "------------You Have Scheduled Maintenance-------------\n"+
+              "0-)VEHICLE MODEL | SERVICE KM | PLANNED SERVICE TYPE\n"+
+              "-------------------------------------------------------\n"+
+              "----------Main Menu----------\n" +
+              "1-)Service History Tracking\n" +
+              "2-)Maintenance Reminders\n" +
+              "3-)Expense Logging\n" +
+              "4-)Fuel Efficiency Reports\n" +
+              "5-)Back to login menu\n" +
+              "Make a choice(1-5): \n"+
+              "----------Fuel Efficiency Records----------\n" +
+              "1-)Show Fuel Efficiency Records\n" +
+              "2-)Register Fuel Efficiency Records\n" +
+              "3-)Edit Fuel Efficiency Records\n" +
+              "4-)Delete Fuel Efficiency Records\n" +
+              "5-)Previous Menu\n" +
+              "Make a choice(1-5): \n"+
+              "Which line do you want to edit?\n"+
+              "Please use an integer\n"+
+              "----------Main Menu----------\n" +
+              "1-)Service History Tracking\n" +
+              "2-)Maintenance Reminders\n" +
+              "3-)Expense Logging\n" +
+              "4-)Fuel Efficiency Reports\n" +
+              "5-)Back to login menu\n" +
+              "Make a choice(1-5): \n"+
+              "----------Login----------\n" +
+              "1-)Login\n" +
+              "2-)Register\n" +
+              "3-)Change Password\n" +
+              "4-)Exit\n" +
+              "Make a choice(1-4): \n";
+
+      assertEquals(expectedOutput, systemOutRule.getLog());
+  }
+  @Test
+  public void testMain39_FuelEditFail_2() {
+      // Save original System.in
+      InputStream originalSystemIn = System.in;
+
+      // Simulate user input
+      ByteArrayInputStream inputStream = new ByteArrayInputStream(System.lineSeparator().getBytes());
+      System.setIn(inputStream);
+
+      // Call the main method of CarMaintenanceApp
+      String[] args = {"1", "username", "newpassword","4","3","1","Ferrari","asdd","768","5","4"};
+      CarMaintenanceApp.main(args);
+
+      // Restore original System.in
+      System.setIn(originalSystemIn);
+
+      // Assert the desired behavior based on the output
+      String expectedOutput = "----------Login----------\n" +
+              "1-)Login\n" +
+              "2-)Register\n" +
+              "3-)Change Password\n" +
+              "4-)Exit\n" +
+              "Make a choice(1-4): \n" +
+              "Please enter username:\n" +
+              "Please enter password:\n" +
+              "Login Successful\n"+
+              "------------You Have Scheduled Maintenance-------------\n"+
+              "0-)VEHICLE MODEL | SERVICE KM | PLANNED SERVICE TYPE\n"+
+              "-------------------------------------------------------\n"+
+              "----------Main Menu----------\n" +
+              "1-)Service History Tracking\n" +
+              "2-)Maintenance Reminders\n" +
+              "3-)Expense Logging\n" +
+              "4-)Fuel Efficiency Reports\n" +
+              "5-)Back to login menu\n" +
+              "Make a choice(1-5): \n"+
+              "----------Fuel Efficiency Records----------\n" +
+              "1-)Show Fuel Efficiency Records\n" +
+              "2-)Register Fuel Efficiency Records\n" +
+              "3-)Edit Fuel Efficiency Records\n" +
+              "4-)Delete Fuel Efficiency Records\n" +
+              "5-)Previous Menu\n" +
+              "Make a choice(1-5): \n"+
+              "Which line do you want to edit?\n"+
+              "What is the model of the car?\n"+
+              "What is the traveled total road?\n"+
+              "Please use an integer\n"+
+              "----------Main Menu----------\n" +
+              "1-)Service History Tracking\n" +
+              "2-)Maintenance Reminders\n" +
+              "3-)Expense Logging\n" +
+              "4-)Fuel Efficiency Reports\n" +
+              "5-)Back to login menu\n" +
+              "Make a choice(1-5): \n"+
+              "----------Login----------\n" +
+              "1-)Login\n" +
+              "2-)Register\n" +
+              "3-)Change Password\n" +
+              "4-)Exit\n" +
+              "Make a choice(1-4): \n";
+
+      assertEquals(expectedOutput, systemOutRule.getLog());
+  }
+  @Test
+  public void testMain40_FuelEditFail_3() {
+      // Save original System.in
+      InputStream originalSystemIn = System.in;
+
+      // Simulate user input
+      ByteArrayInputStream inputStream = new ByteArrayInputStream(System.lineSeparator().getBytes());
+      System.setIn(inputStream);
+
+      // Call the main method of CarMaintenanceApp
+      String[] args = {"1", "username", "newpassword","4","3","1","Ferrari","456","asdd","5","4"};
+      CarMaintenanceApp.main(args);
+
+      // Restore original System.in
+      System.setIn(originalSystemIn);
+
+      // Assert the desired behavior based on the output
+      String expectedOutput = "----------Login----------\n" +
+              "1-)Login\n" +
+              "2-)Register\n" +
+              "3-)Change Password\n" +
+              "4-)Exit\n" +
+              "Make a choice(1-4): \n" +
+              "Please enter username:\n" +
+              "Please enter password:\n" +
+              "Login Successful\n"+
+              "------------You Have Scheduled Maintenance-------------\n"+
+              "0-)VEHICLE MODEL | SERVICE KM | PLANNED SERVICE TYPE\n"+
+              "-------------------------------------------------------\n"+
+              "----------Main Menu----------\n" +
+              "1-)Service History Tracking\n" +
+              "2-)Maintenance Reminders\n" +
+              "3-)Expense Logging\n" +
+              "4-)Fuel Efficiency Reports\n" +
+              "5-)Back to login menu\n" +
+              "Make a choice(1-5): \n"+
+              "----------Fuel Efficiency Records----------\n" +
+              "1-)Show Fuel Efficiency Records\n" +
+              "2-)Register Fuel Efficiency Records\n" +
+              "3-)Edit Fuel Efficiency Records\n" +
+              "4-)Delete Fuel Efficiency Records\n" +
+              "5-)Previous Menu\n" +
+              "Make a choice(1-5): \n"+
+              "Which line do you want to edit?\n"+
+              "What is the model of the car?\n"+
+              "What is the traveled total road?\n"+
+              "What is the fuel conssumption on this road?\n"+
+              "Please use an integer\n"+
+              "----------Main Menu----------\n" +
+              "1-)Service History Tracking\n" +
+              "2-)Maintenance Reminders\n" +
+              "3-)Expense Logging\n" +
+              "4-)Fuel Efficiency Reports\n" +
+              "5-)Back to login menu\n" +
+              "Make a choice(1-5): \n"+
+              "----------Login----------\n" +
+              "1-)Login\n" +
+              "2-)Register\n" +
+              "3-)Change Password\n" +
+              "4-)Exit\n" +
+              "Make a choice(1-4): \n";
+
+      assertEquals(expectedOutput, systemOutRule.getLog());
+  }
+  @Test
+  public void testMain41_FuelDelete() {
+      // Save original System.in
+      InputStream originalSystemIn = System.in;
+
+      // Simulate user input
+      ByteArrayInputStream inputStream = new ByteArrayInputStream(System.lineSeparator().getBytes());
+      System.setIn(inputStream);
+
+      // Call the main method of CarMaintenanceApp
+      String[] args = {"1", "username", "newpassword","4","4","1","5","4"};
+      CarMaintenanceApp.main(args);
+
+      // Restore original System.in
+      System.setIn(originalSystemIn);
+
+      // Assert the desired behavior based on the output
+      String expectedOutput = "----------Login----------\n" +
+              "1-)Login\n" +
+              "2-)Register\n" +
+              "3-)Change Password\n" +
+              "4-)Exit\n" +
+              "Make a choice(1-4): \n" +
+              "Please enter username:\n" +
+              "Please enter password:\n" +
+              "Login Successful\n"+
+              "------------You Have Scheduled Maintenance-------------\n"+
+              "0-)VEHICLE MODEL | SERVICE KM | PLANNED SERVICE TYPE\n"+
+              "-------------------------------------------------------\n"+
+              "----------Main Menu----------\n" +
+              "1-)Service History Tracking\n" +
+              "2-)Maintenance Reminders\n" +
+              "3-)Expense Logging\n" +
+              "4-)Fuel Efficiency Reports\n" +
+              "5-)Back to login menu\n" +
+              "Make a choice(1-5): \n"+
+              "----------Fuel Efficiency Records----------\n" +
+              "1-)Show Fuel Efficiency Records\n" +
+              "2-)Register Fuel Efficiency Records\n" +
+              "3-)Edit Fuel Efficiency Records\n" +
+              "4-)Delete Fuel Efficiency Records\n" +
+              "5-)Previous Menu\n" +
+              "Make a choice(1-5): \n"+
+              "Which line do you want to delete?\n"+
+              "Data successfully deleted\n"+
+              "----------Main Menu----------\n" +
+              "1-)Service History Tracking\n" +
+              "2-)Maintenance Reminders\n" +
+              "3-)Expense Logging\n" +
+              "4-)Fuel Efficiency Reports\n" +
+              "5-)Back to login menu\n" +
+              "Make a choice(1-5): \n"+
+              "----------Login----------\n" +
+              "1-)Login\n" +
+              "2-)Register\n" +
+              "3-)Change Password\n" +
+              "4-)Exit\n" +
+              "Make a choice(1-4): \n";
+
+      assertEquals(expectedOutput, systemOutRule.getLog());
+  }
+  @Test
+  public void testMain42_FuelDeleteFail() {
+      // Save original System.in
+      InputStream originalSystemIn = System.in;
+
+      // Simulate user input
+      ByteArrayInputStream inputStream = new ByteArrayInputStream(System.lineSeparator().getBytes());
+      System.setIn(inputStream);
+
+      // Call the main method of CarMaintenanceApp
+      String[] args = {"1", "username", "newpassword","4","4","asasd","5","4"};
+      CarMaintenanceApp.main(args);
+
+      // Restore original System.in
+      System.setIn(originalSystemIn);
+
+      // Assert the desired behavior based on the output
+      String expectedOutput = "----------Login----------\n" +
+              "1-)Login\n" +
+              "2-)Register\n" +
+              "3-)Change Password\n" +
+              "4-)Exit\n" +
+              "Make a choice(1-4): \n" +
+              "Please enter username:\n" +
+              "Please enter password:\n" +
+              "Login Successful\n"+
+              "------------You Have Scheduled Maintenance-------------\n"+
+              "0-)VEHICLE MODEL | SERVICE KM | PLANNED SERVICE TYPE\n"+
+              "-------------------------------------------------------\n"+
+              "----------Main Menu----------\n" +
+              "1-)Service History Tracking\n" +
+              "2-)Maintenance Reminders\n" +
+              "3-)Expense Logging\n" +
+              "4-)Fuel Efficiency Reports\n" +
+              "5-)Back to login menu\n" +
+              "Make a choice(1-5): \n"+
+              "----------Fuel Efficiency Records----------\n" +
+              "1-)Show Fuel Efficiency Records\n" +
+              "2-)Register Fuel Efficiency Records\n" +
+              "3-)Edit Fuel Efficiency Records\n" +
+              "4-)Delete Fuel Efficiency Records\n" +
+              "5-)Previous Menu\n" +
+              "Make a choice(1-5): \n"+
+              "Which line do you want to delete?\n"+
+              "Please use an integer\n"+
+              "----------Main Menu----------\n" +
+              "1-)Service History Tracking\n" +
+              "2-)Maintenance Reminders\n" +
+              "3-)Expense Logging\n" +
+              "4-)Fuel Efficiency Reports\n" +
+              "5-)Back to login menu\n" +
+              "Make a choice(1-5): \n"+
+              "----------Login----------\n" +
+              "1-)Login\n" +
+              "2-)Register\n" +
+              "3-)Change Password\n" +
+              "4-)Exit\n" +
+              "Make a choice(1-4): \n";
+
+      assertEquals(expectedOutput, systemOutRule.getLog());
+  }
 }

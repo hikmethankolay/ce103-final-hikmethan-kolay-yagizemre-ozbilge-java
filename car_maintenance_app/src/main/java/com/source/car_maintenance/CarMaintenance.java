@@ -27,7 +27,7 @@ public class CarMaintenance {
    * @return 0 on success.
    * @return -1 on fail.
    */
-  private static int FileDelete(String FileName) {
+  public int FileDelete(String FileName) {
       File file = new File(FileName);
 
       if (file.exists()) {
@@ -37,7 +37,7 @@ public class CarMaintenance {
         	  return -1;
           }
       } else {
-    	  return 0;
+    	  return -1;
       }
   }
   

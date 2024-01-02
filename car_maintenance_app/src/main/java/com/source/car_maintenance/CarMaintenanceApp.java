@@ -458,7 +458,7 @@ public class CarMaintenanceApp {
                           break;
                       }
                       else {
-                    	  System.out.print("Please enter a correct choice!");
+                    	  System.out.print("Please enter a correct choice!\n");
                     	  continue;
                       }
                   } while (run_2);

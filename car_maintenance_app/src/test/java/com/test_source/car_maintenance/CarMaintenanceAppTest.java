@@ -255,7 +255,57 @@ public class CarMaintenanceAppTest {
       assertEquals(expectedOutput, systemOutRule.getLog());
   }
   @Test
-  public void testMain06_ServiceShow() {
+  public void testMain06_MainMenuWrongChoice() {
+      // Save original System.in
+      InputStream originalSystemIn = System.in;
+
+      // Simulate user input
+      ByteArrayInputStream inputStream = new ByteArrayInputStream(System.lineSeparator().getBytes());
+      System.setIn(inputStream);
+
+      // Call the main method of CarMaintenanceApp
+      String[] args = {"1", "username", "newpassword", "88","5","4"};
+      CarMaintenanceApp.main(args);
+
+      // Restore original System.in
+      System.setIn(originalSystemIn);
+
+      // Assert the desired behavior based on the output
+      String expectedOutput = "----------Login----------\n" +
+              "1-)Login\n" +
+              "2-)Register\n" +
+              "3-)Change Password\n" +
+              "4-)Exit\n" +
+              "Make a choice(1-4): \n" +
+              "Please enter username:\n" +
+              "Please enter password:\n" +
+              "Login Successful\n"+
+              "----------Main Menu----------\n" +
+              "1-)Service History Tracking\n" +
+              "2-)Maintenance Reminders\n" +
+              "3-)Expense Logging\n" +
+              "4-)Fuel Efficiency Reports\n" +
+              "5-)Back to login menu\n" +
+              "Make a choice(1-5): \n"+
+              "Please enter a correct choice!\n"+
+              "----------Main Menu----------\n" +
+              "1-)Service History Tracking\n" +
+              "2-)Maintenance Reminders\n" +
+              "3-)Expense Logging\n" +
+              "4-)Fuel Efficiency Reports\n" +
+              "5-)Back to login menu\n" +
+              "Make a choice(1-5): \n"+
+              "----------Login----------\n" +
+              "1-)Login\n" +
+              "2-)Register\n" +
+              "3-)Change Password\n" +
+              "4-)Exit\n" +
+              "Make a choice(1-4): \n";
+
+      assertEquals(expectedOutput, systemOutRule.getLog());
+  }
+  @Test
+  public void testMain07_ServiceShow() {
       // Save original System.in
       InputStream originalSystemIn = System.in;
 
@@ -314,7 +364,7 @@ public class CarMaintenanceAppTest {
       assertEquals(expectedOutput, systemOutRule.getLog());
   }
   @Test
-  public void testMain07_ServiceRegister() {
+  public void testMain08_ServiceRegister() {
       // Save original System.in
       InputStream originalSystemIn = System.in;
 
@@ -374,7 +424,7 @@ public class CarMaintenanceAppTest {
       assertEquals(expectedOutput, systemOutRule.getLog());
   }
   @Test
-  public void testMain08_ServiceRegisterFail() {
+  public void testMain09_ServiceRegisterFail() {
       // Save original System.in
       InputStream originalSystemIn = System.in;
 
@@ -433,7 +483,7 @@ public class CarMaintenanceAppTest {
       assertEquals(expectedOutput, systemOutRule.getLog());
   }
   @Test
-  public void testMain09_ServiceRegisterFail_2() {
+  public void testMain10_ServiceRegisterFail_2() {
       // Save original System.in
       InputStream originalSystemIn = System.in;
 
@@ -494,7 +544,7 @@ public class CarMaintenanceAppTest {
       assertEquals(expectedOutput, systemOutRule.getLog());
   }
   @Test
-  public void testMain10_ServiceEdit() {
+  public void testMain11_ServiceEdit() {
       // Save original System.in
       InputStream originalSystemIn = System.in;
 
@@ -556,7 +606,7 @@ public class CarMaintenanceAppTest {
       assertEquals(expectedOutput, systemOutRule.getLog());
   }
   @Test
-  public void testMain11_ServiceEditFail() {
+  public void testMain12_ServiceEditFail() {
       // Save original System.in
       InputStream originalSystemIn = System.in;
 
@@ -614,7 +664,7 @@ public class CarMaintenanceAppTest {
       assertEquals(expectedOutput, systemOutRule.getLog());
   }
   @Test
-  public void testMain12_ServiceEditFail_2() {
+  public void testMain13_ServiceEditFail_2() {
       // Save original System.in
       InputStream originalSystemIn = System.in;
 
@@ -674,7 +724,7 @@ public class CarMaintenanceAppTest {
       assertEquals(expectedOutput, systemOutRule.getLog());
   }
   @Test
-  public void testMain13_ServiceEditFail_3() {
+  public void testMain14_ServiceEditFail_3() {
       // Save original System.in
       InputStream originalSystemIn = System.in;
 
@@ -736,7 +786,7 @@ public class CarMaintenanceAppTest {
       assertEquals(expectedOutput, systemOutRule.getLog());
   }
   @Test
-  public void testMain14_ServiceDelete() {
+  public void testMain15_ServiceDelete() {
       // Save original System.in
       InputStream originalSystemIn = System.in;
 
@@ -794,7 +844,7 @@ public class CarMaintenanceAppTest {
       assertEquals(expectedOutput, systemOutRule.getLog());
   }
   @Test
-  public void testMain15_ServiceDeleteFail() {
+  public void testMain16_ServiceDeleteFail() {
       // Save original System.in
       InputStream originalSystemIn = System.in;
 
@@ -852,7 +902,7 @@ public class CarMaintenanceAppTest {
       assertEquals(expectedOutput, systemOutRule.getLog());
   }
   @Test
-  public void testMain16_ReminderShow() {
+  public void testMain17_ReminderShow() {
       // Save original System.in
       InputStream originalSystemIn = System.in;
 
@@ -911,7 +961,7 @@ public class CarMaintenanceAppTest {
       assertEquals(expectedOutput, systemOutRule.getLog());
   }
   @Test
-  public void testMain17_ReminerRegister() {
+  public void testMain18_ReminerRegister() {
       // Save original System.in
       InputStream originalSystemIn = System.in;
 
@@ -970,7 +1020,7 @@ public class CarMaintenanceAppTest {
       assertEquals(expectedOutput, systemOutRule.getLog());
   }
   @Test
-  public void testMain18_ReminerRegisterFail() {
+  public void testMain19_ReminerRegisterFail() {
       // Save original System.in
       InputStream originalSystemIn = System.in;
 
@@ -1033,7 +1083,7 @@ public class CarMaintenanceAppTest {
       assertEquals(expectedOutput, systemOutRule.getLog());
   }
   @Test
-  public void testMain19_ReminerEdit() {
+  public void testMain20_ReminerEdit() {
       // Save original System.in
       InputStream originalSystemIn = System.in;
 
@@ -1098,7 +1148,7 @@ public class CarMaintenanceAppTest {
       assertEquals(expectedOutput, systemOutRule.getLog());
   }
   @Test
-  public void testMain20_ReminerEditFail() {
+  public void testMain21_ReminerEditFail() {
       // Save original System.in
       InputStream originalSystemIn = System.in;
 
@@ -1160,7 +1210,7 @@ public class CarMaintenanceAppTest {
       assertEquals(expectedOutput, systemOutRule.getLog());
   }
   @Test
-  public void testMain21_ReminerEditFail_2() {
+  public void testMain22_ReminerEditFail_2() {
       // Save original System.in
       InputStream originalSystemIn = System.in;
 
@@ -1224,7 +1274,7 @@ public class CarMaintenanceAppTest {
       assertEquals(expectedOutput, systemOutRule.getLog());
   }
   @Test
-  public void testMain22_ReminderDelete() {
+  public void testMain23_ReminderDelete() {
       // Save original System.in
       InputStream originalSystemIn = System.in;
 
@@ -1286,7 +1336,7 @@ public class CarMaintenanceAppTest {
       assertEquals(expectedOutput, systemOutRule.getLog());
   }
   @Test
-  public void testMain23_ReminderDeleteFail() {
+  public void testMain24_ReminderDeleteFail() {
       // Save original System.in
       InputStream originalSystemIn = System.in;
 
@@ -1348,7 +1398,7 @@ public class CarMaintenanceAppTest {
   }
   
   @Test
-  public void testMain24_ExpenseShow() {
+  public void testMain25_ExpenseShow() {
       // Save original System.in
       InputStream originalSystemIn = System.in;
 
@@ -1410,7 +1460,7 @@ public class CarMaintenanceAppTest {
       assertEquals(expectedOutput, systemOutRule.getLog());
   }
   @Test
-  public void testMain25_ExpenseRegister() {
+  public void testMain26_ExpenseRegister() {
       // Save original System.in
       InputStream originalSystemIn = System.in;
 
@@ -1473,7 +1523,7 @@ public class CarMaintenanceAppTest {
       assertEquals(expectedOutput, systemOutRule.getLog());
   }
   @Test
-  public void testMain26_ExpenseRegisterFail() {
+  public void testMain27_ExpenseRegisterFail() {
       // Save original System.in
       InputStream originalSystemIn = System.in;
 
@@ -1537,7 +1587,7 @@ public class CarMaintenanceAppTest {
       assertEquals(expectedOutput, systemOutRule.getLog());
   }
   @Test
-  public void testMain27_ExpenseEdit() {
+  public void testMain28_ExpenseEdit() {
       // Save original System.in
       InputStream originalSystemIn = System.in;
 
@@ -1602,7 +1652,7 @@ public class CarMaintenanceAppTest {
       assertEquals(expectedOutput, systemOutRule.getLog());
   }
   @Test
-  public void testMain28_ExpenseEditFail() {
+  public void testMain29_ExpenseEditFail() {
       // Save original System.in
       InputStream originalSystemIn = System.in;
 
@@ -1663,7 +1713,7 @@ public class CarMaintenanceAppTest {
       assertEquals(expectedOutput, systemOutRule.getLog());
   }
   @Test
-  public void testMain29_ExpenseEditFail_2() {
+  public void testMain30_ExpenseEditFail_2() {
       // Save original System.in
       InputStream originalSystemIn = System.in;
 
@@ -1728,7 +1778,7 @@ public class CarMaintenanceAppTest {
       assertEquals(expectedOutput, systemOutRule.getLog());
   }
   @Test
-  public void testMain30_ExpenseDelete() {
+  public void testMain31_ExpenseDelete() {
       // Save original System.in
       InputStream originalSystemIn = System.in;
 
@@ -1789,7 +1839,7 @@ public class CarMaintenanceAppTest {
       assertEquals(expectedOutput, systemOutRule.getLog());
   }
   @Test
-  public void testMain31_ExpenseDeleteFail() {
+  public void testMain32_ExpenseDeleteFail() {
       // Save original System.in
       InputStream originalSystemIn = System.in;
 

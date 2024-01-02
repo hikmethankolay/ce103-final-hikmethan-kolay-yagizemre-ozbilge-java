@@ -79,7 +79,7 @@ public class CarMaintenance {
                   line += (char) character;
               }
           }
-          System.out.println(line);
+          System.out.print(line);
       } catch (IOException ex) {
           System.out.print("File operation failed. There is no record.\n");
           return "-1";

@@ -43,7 +43,6 @@ public class CarMaintenanceApp {
       int maintenance_reminder_menu;
       int expense_menu;
       int fuel_efficiency_menu;
-      int reminder_count = 0;
       boolean run = true;
       String newUsername;
       String newPassword;
@@ -54,6 +53,7 @@ public class CarMaintenanceApp {
       int loop_count = 0;
 
       do {
+          int reminder_count = 0;
           String login_menu_text = "----------Login----------\n" +
                   "1-)Login\n" +
                   "2-)Register\n" +
@@ -80,13 +80,15 @@ public class CarMaintenanceApp {
               if (car.UserLogin(username, password,"user.bin") == 0) {
                   boolean run_2 = true;
                   int main_loop_count = 0;
+                  
+                  if (new File("maintenance_reminder_records.bin").exists()&& reminder_count == 0) {
+                      System.out.print("------------You Have Scheduled Maintenance-------------\n");
+                      car.FileRead("maintenance_reminder_records.bin");
+                      System.out.print("-------------------------------------------------------\n");
+                      reminder_count++;
+                  }
+                  
                   do {
-                      if (new File("maintenance_reminder_records.bin").exists()&& reminder_count == 0) {
-                          System.out.print("\n------------You Have Scheduled Maintenance-------------");
-                          car.FileRead("maintenance_reminder_records.bin");
-                          System.out.print("-------------------------------------------------------");
-                          reminder_count++;
-                      }
                 	  String vehicleModel;
                       int serviceKm;
                       String serviceProvider;
@@ -220,9 +222,9 @@ public class CarMaintenanceApp {
                   	    maintenance_reminder_menu = ((args != null && args.length > 0) ? Integer.valueOf(args[4]) : Integer.valueOf(scanner.next()));
 
                   	    if (maintenance_reminder_menu == 1) {
-                  	        System.out.print("-------------------------------------------------------");
+                  	        System.out.print("-------------------------------------------------------\n");
                   	        car.FileRead("maintenance_reminder_records.bin");
-                  	        System.out.print("-------------------------------------------------------");
+                  	        System.out.print("-------------------------------------------------------\n");
                   	        continue;
                   	    } else if (maintenance_reminder_menu == 2) {
                   	        System.out.print("What is the model of vehicle?\n");
@@ -237,13 +239,13 @@ public class CarMaintenanceApp {
                     	            continue;
                             }
 
-                  	        System.out.print("Who is the planned service type?\n");
+                  	        System.out.print("What is the planned service type?\n");
                   	        serviceType = ((args != null && args.length > 0) ? args[7] : scanner.next());
 
                   	        car.RegisterMaintenanceReminderRecord(vehicleModel, serviceKm, serviceType,"maintenance_reminder_records.bin");
                   	        continue;
                   	    } else if (maintenance_reminder_menu == 3) {
-                  	        System.out.print("Which do you want to edit\n");
+                  	        System.out.print("Which line do you want to edit?\n");
                             try {
                             	lineNumberToEdit = ((args != null && args.length > 0) ? Integer.valueOf(args[5]) : Integer.valueOf(scanner.next()));
                             }
@@ -264,7 +266,7 @@ public class CarMaintenanceApp {
                     	            continue;
                             }
 
-                  	        System.out.print("Who is the planned service type?\n");
+                  	        System.out.print("What is the planned service type?\n");
                   	        serviceType = ((args != null && args.length > 0) ? args[8] : scanner.next());
                   	        car.EditMaintenanceReminderRecord(lineNumberToEdit, vehicleModel, serviceKm, serviceType,"maintenance_reminder_records.bin");
                   	        continue;
@@ -408,7 +410,7 @@ public class CarMaintenanceApp {
                   	        car.RegisterFuelEfficiencyRecord(carModel, fuelConsumed, roadTraveled,"fuel_efficiency_records.bin");
                   	        continue;
                   	    } else if (fuel_efficiency_menu == 3) {
-                  	        System.out.print("Which do you want to edit?\n");
+                  	        System.out.print("Which line do you want to edit?\n");
                             try {
                             	lineNumberToEdit = ((args != null && args.length > 0) ? Integer.valueOf(args[5]) : Integer.valueOf(scanner.next()));
                             }

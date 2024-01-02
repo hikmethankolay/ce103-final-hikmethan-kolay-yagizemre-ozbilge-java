@@ -302,9 +302,9 @@ public class CarMaintenanceApp {
                   	    expense_menu = ((args != null && args.length > 0) ? Integer.valueOf(args[4]) : Integer.valueOf(scanner.next()));
 
                   	    if (expense_menu == 1) {
-                  	        System.out.print("-------------------------------------------------------");
+                  	        System.out.print("-------------------------------------------------------\n");
                   	        car.FileRead("expense_logging_records.bin");
-                  	        System.out.print("-------------------------------------------------------");
+                  	        System.out.print("-------------------------------------------------------\n");
                   	        continue;
                   	    } else if (expense_menu == 2) {
                   	        System.out.print("What is the model of the car?\n");

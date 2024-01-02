@@ -12,12 +12,8 @@
  * 
 */
 package com.source.car_maintenance;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
-
-import org.slf4j.LoggerFactory;
-import ch.qos.logback.classic.Logger;
 
 /**
  *
@@ -30,11 +26,6 @@ import ch.qos.logback.classic.Logger;
  * @author Yagiz Emre OZBILGE
  */
 public class CarMaintenanceApp {
-  /**
-   * @brief Logger for the Car MaintenanceApp class.
-   */
-  private static final Logger logger = (Logger) LoggerFactory.getLogger(CarMaintenanceApp.class);
-
   /**
    * @brief The main entry point of the Car Maintenance App.
    *
@@ -52,7 +43,6 @@ public class CarMaintenanceApp {
       int maintenance_reminder_menu;
       int expense_menu;
       int fuel_efficiency_menu;
-      int reminder_count = 0;
       boolean run = true;
       String newUsername;
       String newPassword;
@@ -63,6 +53,7 @@ public class CarMaintenanceApp {
       int loop_count = 0;
 
       do {
+          int reminder_count = 0;
           String login_menu_text = "----------Login----------\n" +
                   "1-)Login\n" +
                   "2-)Register\n" +
@@ -70,25 +61,34 @@ public class CarMaintenanceApp {
                   "4-)Exit\n" +
                   "Make a choice(1-4): \n";
           	System.out.print(login_menu_text);
-          	login_menu = (args != null && args.length > 0) ? Integer.valueOf(loop_count == 0 ? args[0] : args[args.length - 1]) : scanner.nextInt();
-          	loop_count++;
-          	
+            try {
+            	login_menu = (args != null && args.length > 0) ? Integer.valueOf(loop_count == 0 ? args[0] : args[args.length - 1]) : Integer.valueOf(scanner.next());
+            }
+            catch(NumberFormatException e) {
+            	System.out.print("Please use an integer\n");
+            	loop_count++;
+            	continue;
+            }
+            loop_count++;
           CarMaintenance car = new CarMaintenance();
           if(login_menu == 1){
         	  System.out.print("Please enter username:\n");
         	  username = ((args != null && args.length > 0) ? args[1] : scanner.next());
         	  System.out.print("Please enter password:\n");
         	  password = ((args != null && args.length > 0) ? args[2] : scanner.next());
+        	  
               if (car.UserLogin(username, password,"user.bin") == 0) {
                   boolean run_2 = true;
                   int main_loop_count = 0;
+                  
+                  if (new File("maintenance_reminder_records.bin").exists()&& reminder_count == 0) {
+                      System.out.print("------------You Have Scheduled Maintenance-------------\n");
+                      car.FileRead("maintenance_reminder_records.bin");
+                      System.out.print("-------------------------------------------------------\n");
+                      reminder_count++;
+                  }
+                  
                   do {
-                      if (new File("maintenance_reminder_records.bin").exists()&& reminder_count == 0) {
-                          System.out.print("\n------------You Have Scheduled Maintenance-------------");
-                          car.FileRead("maintenance_reminder_records.bin");
-                          System.out.print("-------------------------------------------------------");
-                          reminder_count++;
-                      }
                 	  String vehicleModel;
                       int serviceKm;
                       String serviceProvider;
@@ -98,7 +98,7 @@ public class CarMaintenanceApp {
                       String carModel;
                       
                       
-                      String main_menu_text = "----------Manin Menu----------\n" +
+                      String main_menu_text = "----------Main Menu----------\n" +
                               "1-)Service History Tracking\n" +
                               "2-)Maintenance Reminders\n" +
                               "3-)Expense Logging\n" +
@@ -124,9 +124,9 @@ public class CarMaintenanceApp {
                           service_menu = ((args != null && args.length > 0) ? Integer.valueOf(args[4]) : Integer.valueOf(scanner.next()));
 
                           if (service_menu == 1) {
-                              System.out.print("-------------------------------------------------------");
+                              System.out.print("-------------------------------------------------------\n");
                               car.FileRead("service_history_records.bin");
-                              System.out.print("-------------------------------------------------------");
+                              System.out.print("-------------------------------------------------------\n");
                               continue;
                           } else if (service_menu == 2) {
                               System.out.print("What is the model of vehicle?\n");
@@ -190,6 +190,7 @@ public class CarMaintenanceApp {
                     	            System.out.print("Please use an integer\n");
                       	            continue;
                               }
+                              car.EditServiceHistoryRecord(lineNumberToEdit, vehicleModel, serviceKm, serviceProvider, serviceCost,"service_history_records.bin");
                               continue;
                           } else if (service_menu == 4) {
                               System.out.print("Which line do you want to delete?\n");
@@ -221,9 +222,9 @@ public class CarMaintenanceApp {
                   	    maintenance_reminder_menu = ((args != null && args.length > 0) ? Integer.valueOf(args[4]) : Integer.valueOf(scanner.next()));
 
                   	    if (maintenance_reminder_menu == 1) {
-                  	        System.out.print("-------------------------------------------------------");
+                  	        System.out.print("-------------------------------------------------------\n");
                   	        car.FileRead("maintenance_reminder_records.bin");
-                  	        System.out.print("-------------------------------------------------------");
+                  	        System.out.print("-------------------------------------------------------\n");
                   	        continue;
                   	    } else if (maintenance_reminder_menu == 2) {
                   	        System.out.print("What is the model of vehicle?\n");
@@ -238,13 +239,13 @@ public class CarMaintenanceApp {
                     	            continue;
                             }
 
-                  	        System.out.print("Who is the planned service type?\n");
+                  	        System.out.print("What is the planned service type?\n");
                   	        serviceType = ((args != null && args.length > 0) ? args[7] : scanner.next());
 
                   	        car.RegisterMaintenanceReminderRecord(vehicleModel, serviceKm, serviceType,"maintenance_reminder_records.bin");
                   	        continue;
                   	    } else if (maintenance_reminder_menu == 3) {
-                  	        System.out.print("Which do you want to edit\n");
+                  	        System.out.print("Which line do you want to edit?\n");
                             try {
                             	lineNumberToEdit = ((args != null && args.length > 0) ? Integer.valueOf(args[5]) : Integer.valueOf(scanner.next()));
                             }
@@ -265,7 +266,7 @@ public class CarMaintenanceApp {
                     	            continue;
                             }
 
-                  	        System.out.print("Who is the planned service type?\n");
+                  	        System.out.print("What is the planned service type?\n");
                   	        serviceType = ((args != null && args.length > 0) ? args[8] : scanner.next());
                   	        car.EditMaintenanceReminderRecord(lineNumberToEdit, vehicleModel, serviceKm, serviceType,"maintenance_reminder_records.bin");
                   	        continue;
@@ -301,9 +302,9 @@ public class CarMaintenanceApp {
                   	    expense_menu = ((args != null && args.length > 0) ? Integer.valueOf(args[4]) : Integer.valueOf(scanner.next()));
 
                   	    if (expense_menu == 1) {
-                  	        System.out.print("-------------------------------------------------------");
+                  	        System.out.print("-------------------------------------------------------\n");
                   	        car.FileRead("expense_logging_records.bin");
-                  	        System.out.print("-------------------------------------------------------");
+                  	        System.out.print("-------------------------------------------------------\n");
                   	        continue;
                   	    } else if (expense_menu == 2) {
                   	        System.out.print("What is the model of the car?\n");
@@ -326,7 +327,7 @@ public class CarMaintenanceApp {
                   	        car.RegisterExpenseRecord(carModel, expenseDate, expenseType, expense,"expense_logging_records.bin");
                   	        continue;
                   	    } else if (expense_menu == 3) {
-                  	        System.out.print("Which do you want to edit\n");
+                  	        System.out.print("Which line do you want to edit\n");
                             try {
                             	lineNumberToEdit = ((args != null && args.length > 0) ? Integer.valueOf(args[5]) : Integer.valueOf(scanner.next()));
                             }
@@ -384,32 +385,37 @@ public class CarMaintenanceApp {
                   	    fuel_efficiency_menu = ((args != null && args.length > 0) ? Integer.valueOf(args[4]) : Integer.valueOf(scanner.next()));
 
                   	    if (fuel_efficiency_menu == 1) {
-                  	        System.out.print("-------------------------------------------------------");
+                  	        System.out.print("-------------------------------------------------------\n");
                   	        car.FileRead("fuel_efficiency_records.bin");
-                  	        System.out.print("-------------------------------------------------------");
+                  	        System.out.print("-------------------------------------------------------\n");
                   	        continue;
                   	    } else if (fuel_efficiency_menu == 2) {
                   	        System.out.print("What is the model of the car?\n");
-                  	        carModel = ((args != null && args.length > 0) ? args[8] : scanner.next());
+                  	        carModel = ((args != null && args.length > 0) ? args[5] : scanner.next());
+                  	        
+	                  	      System.out.print("What is the traveled total road?\n");
+	                          try {
+	                          	roadTraveled = ((args != null && args.length > 0) ? Float.valueOf(args[6]) : Float.valueOf(scanner.next()));
+	                          }
+	                          catch(NumberFormatException e) {
+	                	            System.out.print("Please use an integer\n");
+	                  	            continue;
+	                          }
+                  	        
+                  	        System.out.print("What is the fuel conssumption on this road?\n");
                             try {
-                            	fuelConsumed = ((args != null && args.length > 0) ? Float.valueOf(args[5]) : Float.valueOf(scanner.next()));
+                            	fuelConsumed = ((args != null && args.length > 0) ? Float.valueOf(args[7]) : Float.valueOf(scanner.next()));
                             }
                             catch(NumberFormatException e) {
                   	            System.out.print("Please use an integer\n");
                     	            continue;
                             }
-
-                            try {
-                            	roadTraveled = ((args != null && args.length > 0) ? Float.valueOf(args[6]) : Float.valueOf(scanner.next()));
-                            }
-                            catch(NumberFormatException e) {
-                  	            System.out.print("Please use an integer\n");
-                    	            continue;
-                            }
+                            
+                            
                   	        car.RegisterFuelEfficiencyRecord(carModel, fuelConsumed, roadTraveled,"fuel_efficiency_records.bin");
                   	        continue;
                   	    } else if (fuel_efficiency_menu == 3) {
-                  	        System.out.print("Which do you want to edit?\n");
+                  	        System.out.print("Which line do you want to edit?\n");
                             try {
                             	lineNumberToEdit = ((args != null && args.length > 0) ? Integer.valueOf(args[5]) : Integer.valueOf(scanner.next()));
                             }
@@ -418,15 +424,9 @@ public class CarMaintenanceApp {
                     	            continue;
                             }
                   	        System.out.print("What is the model of the car?\n");
-                  	        carModel = ((args != null && args.length > 0) ? args[8] : scanner.next());
-                            try {
-                            	fuelConsumed = ((args != null && args.length > 0) ? Float.valueOf(args[6]) : Float.valueOf(scanner.next()));
-                            }
-                            catch(NumberFormatException e) {
-                  	            System.out.print("Please use an integer\n");
-                    	            continue;
-                            }
-
+                  	        carModel = ((args != null && args.length > 0) ? args[6] : scanner.next());
+                  	        
+                            System.out.print("What is the traveled total road?\n");
                             try {
                             	roadTraveled = ((args != null && args.length > 0) ? Float.valueOf(args[7]) : Float.valueOf(scanner.next()));
                             }
@@ -434,6 +434,16 @@ public class CarMaintenanceApp {
                   	            System.out.print("Please use an integer\n");
                     	            continue;
                             }
+                  	        
+                  	        System.out.print("What is the fuel conssumption on this road?\n");
+                            try {
+                            	fuelConsumed = ((args != null && args.length > 0) ? Float.valueOf(args[8]) : Float.valueOf(scanner.next()));
+                            }
+                            catch(NumberFormatException e) {
+                  	            System.out.print("Please use an integer\n");
+                    	            continue;
+                            }
+
                   	        car.EditFuelEfficiencyRecord(lineNumberToEdit, carModel, fuelConsumed, roadTraveled,"fuel_efficiency_records.bin");
                   	        continue;
                   	    } else if (fuel_efficiency_menu == 4) {
@@ -457,7 +467,7 @@ public class CarMaintenanceApp {
                           break;
                       }
                       else {
-                    	  System.out.print("Please enter a correct choice!");
+                    	  System.out.print("Please enter a correct choice!\n");
                     	  continue;
                       }
                   } while (run_2);

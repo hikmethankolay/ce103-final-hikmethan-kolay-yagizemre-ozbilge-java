@@ -98,6 +98,7 @@ del *_test.bin
 del *_test_2.bin
 del *_test_3.bin
 del *_test_4.bin
+del *_records.bin
 
 cd ..
 

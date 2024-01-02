@@ -106,6 +106,12 @@ public void TestFileWrite()
     car.FileWrite("test5.bin", writeString);
     assertEquals(testString, car.FileRead("test5.bin"));
 }
+@Test
+public void TestFileErase()
+{
+    CarMaintenance car = new CarMaintenance();
+    assertEquals(fail, car.FileDelete("test_delete_fail.bin"));
+}
 
 @Test
 public void TestFileReadFail()
